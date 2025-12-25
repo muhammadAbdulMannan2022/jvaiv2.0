@@ -27,7 +27,7 @@ const GlassTorus = () => {
       {/* Control Size here: args={[Radius, Tube_Thickness, Radial_Segments, Tubular_Segments]} */}
       <Torus
         ref={meshRef}
-        args={[0.9, 0.4, 35, 35]}
+        args={[0.9, 0.3, 35, 35]} // , size , , ,
         rotation={[Math.PI / 2, 0, 0]}
       >
         <meshStandardMaterial
