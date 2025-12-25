@@ -12,7 +12,8 @@ const GlassTorus = () => {
 
     if (meshRef.current) {
       meshRef.current.rotation.y = time * 0.12;
-      meshRef.current.rotation.x = Math.cos(time * 0.1) * 0.5;
+      meshRef.current.rotation.x = Math.sin(time * 0.09);
+      //   meshRef.current.rotation.x = Math.sin(time * 0.9) * 0.5;
     }
 
     if (materialRef.current) {
@@ -27,7 +28,7 @@ const GlassTorus = () => {
       <Torus
         ref={meshRef}
         args={[0.9, 0.4, 35, 35]}
-        rotation={[Math.PI / 4, 0, 0]}
+        rotation={[Math.PI / 2, 0, 0]}
       >
         <meshStandardMaterial
           ref={materialRef}
