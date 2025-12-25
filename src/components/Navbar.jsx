@@ -39,22 +39,21 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full z-50 pointer-events-none">
-      {/* <nav className="fixed top-0 left-0 w-full z-50 pointer-events-none"> */}
-      <div className="pointer-events-auto w-full bg-white/80 backdrop-blur-md shadow-lg rounded-b-3xl">
-        <div className="flex justify-between items-center  font-sans px-6 py-4 md:px-8 lg:px-12 mx-4 max-w-screen-2xl md:mx-auto">
+    <nav className="w-full z-50 pointer-events-none sticky top-0">
+      <div className="pointer-events-auto w-full bg-[#050505]/80 backdrop-blur-md shadow-lg shadow-black/50 rounded-b-3xl border-b border-white/10">
+        <div className="flex justify-between items-center font-sans px-6 py-4 md:px-8 lg:px-12 mx-4 max-w-screen-2xl md:mx-auto">
           {/* Logo - Always visible */}
           <div className="shrink-0">
             <img
               onClick={() => handleNavClick("/")}
-              className="w-20 lg:w-24 cursor-pointer transition-transform hover:scale-105"
+              className="w-20 lg:w-24 cursor-pointer transition-transform hover:scale-105 brightness-0 invert"
               src="/logo.png"
               alt="JVAI Logo"
             />
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 lg:gap-10 text-[#222428] text-sm lg:text-base">
+          <div className="hidden md:flex items-center gap-8 lg:gap-10 text-white/80 text-sm lg:text-base">
             {navItems.map((item) => {
               const isChildActive = item.child?.some((child) =>
                 currentPath.startsWith(child.path)
@@ -66,8 +65,8 @@ export default function Navbar() {
                   <button
                     className={`flex items-center gap-1 transition-colors ${
                       isActive
-                        ? "text-blue-600 font-medium"
-                        : "hover:text-blue-600"
+                        ? "text-blue-500 font-medium"
+                        : "hover:text-blue-400"
                     }`}
                     aria-haspopup="true"
                     aria-expanded={openDropdown === item.name}
@@ -76,15 +75,15 @@ export default function Navbar() {
                     <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                   </button>
 
-                  <ul className="absolute left-1/2 -translate-x-1/2 mt-4 w-48 bg-white shadow-xl rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100">
+                  <ul className="absolute left-1/2 -translate-x-1/2 mt-4 w-48 bg-[#0f0f0f] shadow-xl shadow-black/50 rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-white/10">
                     {item.child.map((child) => (
                       <li key={child.path}>
                         <Link
                           to={child.path}
                           className={`block px-5 py-2.5 text-sm transition-colors ${
                             currentPath.startsWith(child.path)
-                              ? "text-blue-600 bg-blue-50"
-                              : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                              ? "text-blue-500 bg-white/5"
+                              : "text-white/70 hover:text-white hover:bg-white/5"
                           }`}
                         >
                           {child.text}
@@ -99,8 +98,8 @@ export default function Navbar() {
                   to={item.path}
                   className={`relative pb-1 transition-colors ${
                     isActive
-                      ? "text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-blue-600"
-                      : "hover:text-blue-600"
+                      ? "text-blue-500 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-blue-500"
+                      : "hover:text-blue-400"
                   }`}
                 >
                   {item.name}
@@ -113,7 +112,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <Link
               to="/contact"
-              className="bg-linear-to-r from-[#0033FF] to-blue-700 text-white px-6 py-2.5 rounded-full font-medium text-sm hover:shadow-md hover:shadow-blue-300 transition-all hover:scale-105"
+              className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-medium text-sm hover:bg-blue-500 transition-all hover:scale-105 shadow-lg shadow-blue-900/20"
             >
               Contact Us
             </Link>
@@ -122,7 +121,7 @@ export default function Navbar() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden p-2 text-gray-800"
+            className="md:hidden p-2 text-white"
             aria-label="Toggle mobile menu"
           >
             {mobileOpen ? <X size={28} /> : <Menu size={28} />}
@@ -133,28 +132,28 @@ export default function Navbar() {
       {/* Mobile Menu Sidebar */}
       <div
         className={`fixed inset-0 z-40 transition-colors duration-300 ${
-          mobileOpen ? "bg-black/50" : "pointer-events-none"
+          mobileOpen ? "bg-black/80 backdrop-blur-sm" : "pointer-events-none"
         }`}
         onClick={closeMobileMenu}
       />
 
       <div
-        className={`fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-[#0f0f0f] shadow-2xl border-l border-white/10 z-50 transform transition-transform duration-300 ease-in-out ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Mobile Header with Logo + Close */}
-          <div className="flex items-center justify-between p-6 border-b">
+          <div className="flex items-center justify-between p-6 border-b border-white/10">
             <img
               onClick={() => handleNavClick("/")}
-              className="w-16 cursor-pointer"
+              className="w-16 cursor-pointer brightness-0 invert"
               src="/logo.png"
               alt="JVAI Logo"
             />
             <button
               onClick={closeMobileMenu}
-              className="p-2 text-gray-600 hover:text-gray-900"
+              className="p-2 text-white/60 hover:text-white"
               aria-label="Close menu"
             >
               <X size={28} />
@@ -174,7 +173,7 @@ export default function Navbar() {
                   <button
                     onClick={() => toggleDropdown(item.name)}
                     className={`w-full flex justify-between items-center py-4 text-lg font-medium transition-colors ${
-                      isActive ? "text-blue-600" : "text-gray-800"
+                      isActive ? "text-blue-500" : "text-white/80"
                     }`}
                   >
                     <span>{item.name}</span>
@@ -192,7 +191,7 @@ export default function Navbar() {
                         : "max-h-0 opacity-0"
                     }`}
                   >
-                    <div className="ml-4 mt-2 space-y-1 border-l-2 border-blue-200 pl-4">
+                    <div className="ml-4 mt-2 space-y-1 border-l-2 border-white/10 pl-4">
                       {item.child.map((sub) => (
                         <Link
                           key={sub.path}
@@ -200,8 +199,8 @@ export default function Navbar() {
                           onClick={() => handleNavClick(sub.path)}
                           className={`block py-3 text-base transition-colors ${
                             currentPath.startsWith(sub.path)
-                              ? "text-blue-600 font-medium"
-                              : "text-gray-600 hover:text-blue-600"
+                              ? "text-blue-500 font-medium"
+                              : "text-white/60 hover:text-blue-400"
                           }`}
                         >
                           {sub.text}
@@ -217,8 +216,8 @@ export default function Navbar() {
                   onClick={() => handleNavClick(item.path)}
                   className={`block py-4 text-lg font-medium transition-colors ${
                     isActive
-                      ? "text-blue-600"
-                      : "text-gray-800 hover:text-blue-600"
+                      ? "text-blue-500"
+                      : "text-white/80 hover:text-blue-400"
                   }`}
                 >
                   {item.name}
@@ -228,11 +227,11 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Contact Button */}
-          <div className="p-6 border-t">
+          <div className="p-6 border-t border-white/10">
             <Link
               to="/contact"
               onClick={closeMobileMenu}
-              className="block w-full text-center bg-linear-to-r from-blue-800 to-blue-500 text-white px-6 py-3.5 rounded-full font-medium text-base hover:shadow-xl transition-all hover:scale-105"
+              className="block w-full text-center bg-blue-600 text-white px-6 py-3.5 rounded-full font-medium text-base hover:bg-blue-500 hover:shadow-xl transition-all hover:scale-105"
             >
               Contact Us
             </Link>

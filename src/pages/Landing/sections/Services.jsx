@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, PlayCircle } from "lucide-react";
 import Scene from "../../../components/services/Sceane";
 import ServiceCard from "../../../components/services/ServiceCard";
+import ModelViewer from "../../../components/services/ModelViewer";
 
 const SERVICES = [
   {
@@ -11,30 +12,35 @@ const SERVICES = [
     title: "Editorial Design",
     category: "Visual Identity",
     img: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop",
+    model: "/bot.glb",
   },
   {
     id: 2,
     title: "Interaction",
     category: "Motion Systems",
     img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop",
+    model: "/bot.glb",
   },
   {
     id: 3,
     title: "3D Art Direction",
     category: "Creative Dev",
     img: "https://images.unsplash.com/photo-1633167606207-d840b5070fc2?q=80&w=2000&auto=format&fit=crop",
+    model: "/bot.glb",
   },
   {
     id: 4,
     title: "Future of AI",
     category: "Strategic Design",
     img: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000&auto=format&fit=crop",
+    model: "/bot.glb",
   },
   {
     id: 5,
     title: "Modern Web",
     category: "Fullstack Mastery",
     img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop",
+    model: "/bot.glb",
   },
 ];
 
@@ -114,21 +120,29 @@ const App = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 flex items-center justify-center p-6 bg-black/90 backdrop-blur-xl"
+            className="fixed inset-0 z-100 flex items-center justify-center p-6 bg-black/50 backdrop-blur-xl"
+            onClick={()=>setSelectedService(null)}
           >
             <motion.div
               initial={{ scale: 0.9, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 50 }}
               className="bg-[#0f0f0f] border border-white/10 w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-auto max-h-[90vh]"
+              onClick={(e)=>e.stopPropagation()}
             >
-              <div className="md:w-1/2 relative h-64 md:h-auto">
-                <img
-                  src={selectedService.img}
-                  alt={selectedService.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-linear-to-r from-black/50 to-transparent" />
+              <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
+                {selectedService.model ? (
+                  <ModelViewer modelPath={selectedService.model} />
+                ) : (
+                  <>
+                    <img
+                      src={selectedService.img}
+                      alt={selectedService.title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-r from-black/50 to-transparent" />
+                  </>
+                )}
               </div>
               <div className="md:w-1/2 p-8 md:p-16 flex flex-col justify-center">
                 <div className="flex justify-between items-start mb-12">
@@ -142,7 +156,7 @@ const App = () => {
                   </div>
                   <button
                     onClick={() => setSelectedService(null)}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                    className="p-2 hover:bg-white/10 rounded-full transition-colors hover:cursor-pointer"
                   >
                     <X size={24} />
                   </button>
