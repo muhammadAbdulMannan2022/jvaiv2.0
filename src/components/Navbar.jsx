@@ -39,7 +39,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full z-50 pointer-events-none sticky top-0">
+    <nav className="w-full pointer-events-none sticky top-0 z-9999999999">
       <div className="pointer-events-auto w-full bg-[#050505]/80 backdrop-blur-md shadow-lg shadow-black/50 rounded-b-3xl border-b border-white/10">
         <div className="flex justify-between items-center font-sans px-6 py-4 md:px-8 lg:px-12 mx-4 max-w-screen-2xl md:mx-auto">
           {/* Logo - Always visible */}

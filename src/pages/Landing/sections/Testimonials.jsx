@@ -281,7 +281,7 @@ const SpatialCard = ({ item, panX, panY }) => {
         translateX: "-50%",
         translateY: "-50%",
       }}
-      className={`shrink-0 bg-white rounded-[48px] p-12 text-[#050505] transition-[background-color] duration-500 ease-out flex flex-col justify-between group w-full h-auto md:w-[450px] md:h-[420px]`}
+      className={`shrink-0 bg-white rounded-[48px] p-12 text-[#050505] transition-[background-color] duration-500 ease-out flex flex-col justify-between group w-full h-auto md:w-112.5 md:h-105`}
     >
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-8">
@@ -353,7 +353,7 @@ const Testimonials = () => {
       </div>
 
       <section className="relative w-full h-[90vh] overflow-hidden bg-[#050505] cursor-grab active:cursor-grabbing">
-        <div className="w-full h-20 bg-linear-to-b from-black to-transparent absolute z-10 "></div>
+        <div className="w-full h-20 bg-linear-to-b from-black to-transparent absolute z-100 "></div>
         {/* Parallax Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
