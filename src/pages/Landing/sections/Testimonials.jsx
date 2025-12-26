@@ -6,7 +6,7 @@ import {
   useSpring,
   AnimatePresence,
 } from "framer-motion";
-import {  Maximize2, Move, Sparkles } from "lucide-react";
+import { Maximize2, Move, Sparkles } from "lucide-react";
 const TESTIMONIALS = [
   {
     id: 1,
@@ -287,9 +287,12 @@ const SpatialCard = ({ item, panX, panY }) => {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
             <div className="w-auto h-12">
-               <img src={item.logo} alt="brand" className="w-full h-full object-cover" />
+              <img
+                src={item.logo}
+                alt="brand"
+                className="w-full h-full object-cover"
+              />
             </div>
-           
           </div>
           <motion.div
             style={{ opacity: useTransform(distance, [0, 150], [1, 0]) }}
@@ -349,7 +352,7 @@ const Testimonials = () => {
         </motion.div>
       </div>
 
-      <section className="relative w-full h-screen overflow-hidden bg-[#050505] cursor-grab active:cursor-grabbing">
+      <section className="relative w-full h-[90vh] overflow-hidden bg-[#050505] cursor-grab active:cursor-grabbing">
         <div className="w-full h-20 bg-linear-to-b from-black to-transparent absolute z-10 "></div>
         {/* Parallax Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
