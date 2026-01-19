@@ -4,6 +4,7 @@ import TrustSection from "./sections/TrustSection";
 import Services from "./sections/Services";
 import Testimonials from "./sections/Testimonials";
 import Experts from "./sections/Exparts";
+import PhotoGallery3D from "./sections/PhotoGallery";
 
 export default function Landing() {
   return (
@@ -13,6 +14,7 @@ export default function Landing() {
       <Services />
       <Experts />
       <Testimonials />
+      <PhotoGallery3D />
     </div>
   );
 }

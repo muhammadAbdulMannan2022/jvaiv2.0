@@ -106,7 +106,7 @@ const AboutPage = () => {
     <div ref={pageRef} className="pb-20">
       {/* 1. Hero Section */}
       <section className="bg-[url('/aboutus.png')] bg-cover bg-center bg-no-repeat ">
-        <div className="w-full h-full bg-black/60 py-14">
+        <div className="w-full h-full py-14">
           <div className="max-w-5xl mx-auto text-center">
             <span className="about-hero-text inline-block px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold tracking-widest uppercase mb-8">
               The Nexus Story
