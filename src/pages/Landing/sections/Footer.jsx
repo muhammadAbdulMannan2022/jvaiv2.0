@@ -10,9 +10,39 @@ import {
 
 import { Link } from "react-router";
 import { Linkedin } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const footer = React.useRef(null);
+  gsap.registerPlugin(ScrollTrigger);
+
+  useGSAP(() => {
+    gsap.set(footer.current, { opacity: 0 });
+
+    ScrollTrigger.create({
+      trigger: "#footer",
+      start: "bottom bottom",
+      onEnter: () => {
+        gsap.to(footer.current, {
+          opacity: 1,
+          duration: 0.6,
+          ease: "power2.out",
+        });
+      },
+      onLeaveBack: () => {
+        gsap.to(footer.current, {
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.in",
+        });
+      },
+      // markers: true, // remove in prod
+    });
+  }, []);
+
   const submit = async () => {
     if (!email) {
       alert("type your email");
@@ -21,7 +51,10 @@ const Footer = () => {
     }
   };
   return (
-    <footer className="text-white pt-8 w-full bg-[#050505] open-sans-text border-t border-white/5">
+    <footer
+      id="footer"
+      className="text-white pt-8 w-full bg-[#050505] open-sans-text border-t border-white/5"
+    >
       <div className="container max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-8 w-full border-t border-b border-white/10 py-12">
         {/* Logo and Description */}
         <div className="flex flex-col items-center md:items-start w-full md:w-1/5">
@@ -44,37 +77,58 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4 text-white">Services</h3>
           <ul className="space-y-2 list-disc text-gray-400 ml-4">
             <li>
-              <Link href="/services" className="hover:text-blue-500 transition-colors">
+              <Link
+                href="/services"
+                className="hover:text-blue-500 transition-colors"
+              >
                 Web Development
               </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-blue-500 transition-colors">
+              <Link
+                href="/services"
+                className="hover:text-blue-500 transition-colors"
+              >
                 AI Development
               </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-blue-500 transition-colors">
+              <Link
+                href="/services"
+                className="hover:text-blue-500 transition-colors"
+              >
                 Mobile App Development
               </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-blue-500 transition-colors">
+              <Link
+                href="/services"
+                className="hover:text-blue-500 transition-colors"
+              >
                 SaaS Design
               </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-blue-500 transition-colors">
+              <Link
+                href="/services"
+                className="hover:text-blue-500 transition-colors"
+              >
                 WordPress Development
               </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-blue-500 transition-colors">
+              <Link
+                href="/services"
+                className="hover:text-blue-500 transition-colors"
+              >
                 Shopify Store
               </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-blue-500 transition-colors">
+              <Link
+                href="/services"
+                className="hover:text-blue-500 transition-colors"
+              >
                 Graphic Design
               </Link>
             </li>
@@ -83,9 +137,7 @@ const Footer = () => {
 
         {/* Contact Us */}
         <div className="text-gray-400 w-full md:w-1/5">
-          <h3 className="text-lg font-semibold mb-4 text-white">
-            Contact Us
-          </h3>
+          <h3 className="text-lg font-semibold mb-4 text-white">Contact Us</h3>
           <p className="flex items-center gap-2 mb-2 hover:text-blue-500 transition-colors">
             <FaPhone className="text-blue-500" />
             <span>+880 1332-840935</span>
@@ -99,9 +151,7 @@ const Footer = () => {
 
         {/* Newsletter + Follow Us */}
         <div className="text-gray-400 w-full md:w-1/5">
-          <h3 className="text-lg font-semibold mb-4 text-white">
-            Newsletter
-          </h3>
+          <h3 className="text-lg font-semibold mb-4 text-white">Newsletter</h3>
           <p className="mb-4 text-sm">
             Stay connected with innovation. Subscribe now for expert insights,
             latest releases, and agency-exclusive offers.
@@ -157,9 +207,18 @@ const Footer = () => {
       </div>
 
       {/* Large Logo at Bottom */}
-      <div className="mt-8 flex justify-center items-end opacity-20 hover:opacity-100 transition-opacity duration-700">
-        <img loading="lazy" src="/footer.png" alt="Footer Graphic" className="brightness-0 invert filter" />
+      <div
+        ref={footer}
+        className="mt-8 flex justify-center items-end opacity-20 transition-opacity duration-700"
+      >
+        <img
+          loading="lazy"
+          src="/footer.png"
+          alt="Footer Graphic"
+          className="brightness-0 invert filter"
+        />
       </div>
+      <div id="footerEnd"></div>
     </footer>
   );
 };

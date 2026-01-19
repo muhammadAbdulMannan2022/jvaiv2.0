@@ -76,7 +76,7 @@ export default function TrustSection() {
       </div>
 
       <div className="relative w-full">
-        <div className="bg-linear-to-r from-[#050505] via-[#050505] to-transparent absolute top-0 left-0 w-52 h-full z-50"></div>
+        <div className="bg-linear-to-r from-[#050505] via-[#050505] to-transparent absolute top-0 left-0 w-14 md:w-52 h-full z-50"></div>
         <div className="mb-6">
           {/* left marquee uses logos */}
           <LogoMarquee direction="left" items={logos} />
@@ -85,7 +85,7 @@ export default function TrustSection() {
           {/* right marquee uses logos1 */}
           <LogoMarquee direction="right" items={logos1} />
         </div>
-        <div className="bg-linear-to-l from-[#050505] via-[#050505] to-transparent absolute top-0 right-0 w-52 h-full z-50"></div>
+        <div className="bg-linear-to-l from-[#050505] via-[#050505] to-transparent absolute top-0 right-0 w-14 md:w-52 h-full z-50"></div>
       </div>
     </div>
   );

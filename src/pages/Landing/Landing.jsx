@@ -3,6 +3,7 @@ import Hero from "./sections/Hero";
 import TrustSection from "./sections/TrustSection";
 import Services from "./sections/Services";
 import Testimonials from "./sections/Testimonials";
+import Experts from "./sections/Exparts";
 
 export default function Landing() {
   return (
@@ -10,6 +11,7 @@ export default function Landing() {
       <Hero />
       <TrustSection />
       <Services />
+      <Experts />
       <Testimonials />
     </div>
   );
