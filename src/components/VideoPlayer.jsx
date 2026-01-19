@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
-const VideoPlayer = ({ url, poster, className = "" }) => {
+const VideoPlayer = ({ url, poster, className = "", controls = false }) => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -38,6 +38,7 @@ const VideoPlayer = ({ url, poster, className = "" }) => {
         className="w-full h-full object-cover cursor-pointer"
         loop
         playsInline
+        controls={controls}
       />
 
       {/* Overlay UI */}

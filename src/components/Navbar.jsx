@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router";
@@ -39,7 +37,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full pointer-events-none sticky top-0 z-9999999999">
+    <nav className="w-full sticky top-0 z-9999999999">
       <div className="pointer-events-auto w-full bg-[#050505]/80 backdrop-blur-md shadow-lg shadow-black/50 rounded-b-3xl border-b border-white/10">
         <div className="flex justify-between items-center font-sans px-6 py-4 md:px-8 lg:px-12 mx-4 max-w-screen-2xl md:mx-auto">
           {/* Logo - Always visible */}
@@ -56,7 +54,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8 lg:gap-10 text-white/80 text-sm lg:text-base">
             {navItems.map((item) => {
               const isChildActive = item.child?.some((child) =>
-                currentPath.startsWith(child.path)
+                currentPath.startsWith(child.path),
               );
               const isActive = currentPath === item.path || isChildActive;
 
@@ -164,7 +162,7 @@ export default function Navbar() {
           <div className="flex-1 overflow-y-auto px-6 py-6 space-y-1">
             {navItems.map((item) => {
               const isChildActive = item.child?.some((c) =>
-                currentPath.startsWith(c.path)
+                currentPath.startsWith(c.path),
               );
               const isActive = currentPath === item.path || isChildActive;
 

@@ -7,6 +7,7 @@ import AboutPage from "../pages/About/AboutUs";
 import ProjectDetails from "../components/servicePage/ProjectDetails";
 import Career from "../pages/career/Career";
 import JobDetails from "../pages/career/JobDetails";
+import TeamPage from "../pages/Team/Team";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
           {
             path: "career/:id",
             element: <JobDetails />,
+          },
+          {
+            path: "team",
+            element: <TeamPage />,
           },
         ],
       },
