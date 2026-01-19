@@ -44,7 +44,7 @@ const SERVICES = [
   },
 ];
 
-const App = () => {
+const App = ({ titleClass }) => {
   const [selectedService, setSelectedService] = useState(null);
 
   return (
@@ -63,7 +63,9 @@ const App = () => {
             <p className="text-blue-500 uppercase tracking-[0.4em] font-bold text-xs mb-4">
               Our Expertise
             </p>
-            <h1 className="text-6xl md:text-8xl font-heading font-bold leading-tight max-w-4xl tracking-tight">
+            <h1
+              className={` font-heading font-bold leading-tight max-w-4xl tracking-tight ${titleClass ? titleClass : "text-6xl md:text-8xl"}`}
+            >
               Crafting Digital <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-white via-white/70 to-white/30">
                 Excellence.
@@ -121,14 +123,14 @@ const App = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-100 flex items-center justify-center p-6 bg-black/50 backdrop-blur-xl"
-            onClick={()=>setSelectedService(null)}
+            onClick={() => setSelectedService(null)}
           >
             <motion.div
               initial={{ scale: 0.9, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 50 }}
               className="bg-[#0f0f0f] border border-white/10 w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-auto max-h-[90vh]"
-              onClick={(e)=>e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
             >
               <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
                 {selectedService.model ? (

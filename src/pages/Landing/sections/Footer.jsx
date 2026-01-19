@@ -16,32 +16,6 @@ import { useGSAP } from "@gsap/react";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
-  const footer = React.useRef(null);
-  gsap.registerPlugin(ScrollTrigger);
-
-  useGSAP(() => {
-    gsap.set(footer.current, { opacity: 0 });
-
-    ScrollTrigger.create({
-      trigger: "#footer",
-      start: "bottom bottom",
-      onEnter: () => {
-        gsap.to(footer.current, {
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-        });
-      },
-      onLeaveBack: () => {
-        gsap.to(footer.current, {
-          opacity: 0,
-          duration: 0.4,
-          ease: "power2.in",
-        });
-      },
-      // markers: true, // remove in prod
-    });
-  }, []);
 
   const submit = async () => {
     if (!email) {
@@ -53,7 +27,7 @@ const Footer = () => {
   return (
     <footer
       id="footer"
-      className="text-white pt-8 w-full bg-[#050505] open-sans-text border-t border-white/5"
+      className="text-white pt-8 w-full bg-[#050505] open-sans-text border-t border-white/5 group"
     >
       <div className="container max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-8 w-full border-t border-b border-white/10 py-12">
         {/* Logo and Description */}
@@ -207,10 +181,7 @@ const Footer = () => {
       </div>
 
       {/* Large Logo at Bottom */}
-      <div
-        ref={footer}
-        className="mt-8 flex justify-center items-end opacity-20 transition-opacity duration-700"
-      >
+      <div className="mt-8 flex justify-center items-end opacity-20 transition-opacity duration-700 group-hover:opacity-100">
         <img
           loading="lazy"
           src="/footer.png"
