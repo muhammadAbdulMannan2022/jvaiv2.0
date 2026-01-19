@@ -105,10 +105,10 @@ const Experts = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-blue-500 uppercase tracking-[0.6em] font-black text-[10px] mb-4">
+          <p className="text-blue-500 uppercase tracking-[0.6em] font-black text-[10px] mb-4 text-end md:text-start">
             The Engineering Core
           </p>
-          <h2 className="text-5xl md:text-7xl font-heading font-bold tracking-tighter">
+          <h2 className="text-5xl md:text-7xl font-heading font-bold tracking-tighter text-end md:text-start">
             Technological <br /> Masters.
           </h2>
         </motion.div>

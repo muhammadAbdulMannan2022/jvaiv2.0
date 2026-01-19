@@ -256,7 +256,7 @@ const YearSection = ({ year, items }) => {
   return (
     <div className="mb-32">
       {/* Year divider */}
-      <div ref={yearRef} className="sticky top-8 md:top-24 z-20 mb-16">
+      <div ref={yearRef} className="sticky top-18 md:top-24 z-20 mb-16">
         <div className="flex items-center gap-6">
           <h2 className="text-6xl md:text-8xl font-bold text-white">{year}</h2>
           <div className="flex-1 h-px bg-white/20" />
