@@ -5,6 +5,8 @@ import Landing from "../pages/Landing/Landing";
 import Services from "../pages/services/Services";
 import AboutPage from "../pages/About/AboutUs";
 import ProjectDetails from "../components/servicePage/ProjectDetails";
+import Career from "../pages/career/Career";
+import JobDetails from "../pages/career/JobDetails";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
           {
             path: "projects",
             element: <ProjectDetails />,
+          },
+          {
+            path: "career",
+            element: <Career />,
+          },
+          {
+            path: "career/:id",
+            element: <JobDetails />,
           },
         ],
       },

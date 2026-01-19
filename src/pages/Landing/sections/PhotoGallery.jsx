@@ -193,7 +193,7 @@ const GalleryItem = ({ item, index, year }) => {
           )}
 
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
         </div>
 
         {/* Info overlay */}
