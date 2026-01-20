@@ -8,6 +8,11 @@ import ProjectDetails from "../components/servicePage/ProjectDetails";
 import Career from "../pages/career/Career";
 import JobDetails from "../pages/career/JobDetails";
 import TeamPage from "../pages/Team/Team";
+import Works from "../pages/Works/Works";
+import ContactPage from "../pages/Contact/ContactUs";
+import BlogPage from "../pages/Blog/BlogPage";
+import BlogEditor from "../pages/Blog/Editor";
+import BlogDetails from "../pages/Blog/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +49,26 @@ const router = createBrowserRouter([
           {
             path: "team",
             element: <TeamPage />,
+          },
+          {
+            path: "work",
+            element: <Works />,
+          },
+          {
+            path: "contact",
+            element: <ContactPage />,
+          },
+          {
+            path: "blog",
+            element: <BlogPage />,
+          },
+          {
+            path: "blog-editor",
+            element: <BlogEditor />,
+          },
+          {
+            path: "blog/:id",
+            element: <BlogDetails />,
           },
         ],
       },

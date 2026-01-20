@@ -30,7 +30,7 @@ const ProjectDetails = () => {
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="detail-animate flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-12 group hover:cursor-pointer"
+          className="detail-animate flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-12 group hover:cursor-pointer absolute left-10"
         >
           <svg
             className="w-5 h-5 group-hover:-translate-x-1 transition-transform"
@@ -46,7 +46,7 @@ const ProjectDetails = () => {
             />
           </svg>
           <span className="text-xs font-black uppercase tracking-widest">
-            Back to Portfolio
+            Back
           </span>
         </button>
 
