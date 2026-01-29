@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { useNavigate } from "react-router";
+import { usePostBlogMutation } from "../../../redux/features/apiSlice";
 
 export default function BlogEditor() {
   const [title, setTitle] = useState("");
@@ -41,6 +42,9 @@ export default function BlogEditor() {
     );
   }, []);
 
+  const [imageFile, setImageFile] = useState(null);
+  const [postBlog, { isLoading: isPublishing }] = usePostBlogMutation();
+
   const applyStyle = (command, value = null) => {
     document.execCommand(command, false, value === null ? undefined : value);
     contentRef.current?.focus();
@@ -48,29 +52,36 @@ export default function BlogEditor() {
 
   const handleImageChange = (file) => {
     if (file && file.type.startsWith("image/")) {
+      setImageFile(file);
       const reader = new FileReader();
       reader.onload = (e) => setImagePreview(e.target.result);
       reader.readAsDataURL(file);
     }
   };
 
-  const handlePublish = () => {
-    const content = contentRef.current?.innerHTML || "";
-    console.log({
-      title,
-      image: imagePreview,
-      content,
-      author: name,
-      authorId: employeeId,
-      date: new Date().toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "numeric",
-      }),
-      readTime: "5 min read",
-      category: "Uncategorized",
-      tags: ["New Entry"],
-    });
+  const handlePublish = async () => {
+    const description = contentRef.current?.innerHTML || "";
+    if (!title || !description) {
+        alert("Transmission failure: Header and Payload required.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("short_description", description.replace(/<[^>]*>/g, '').slice(0, 150) + "...");
+    formData.append("description", description);
+    if (imageFile) {
+        formData.append("picture", imageFile);
+    }
+
+    try {
+      await postBlog(formData).unwrap();
+      alert("Intel Sync Complete. Transmission verified.");
+      navigate("/blog");
+    } catch (err) {
+      alert("Synchronization failed. Check packet integrity.");
+      console.error(err);
+    }
   };
   const onBack = () => {
     navigate(-1);
@@ -250,9 +261,10 @@ export default function BlogEditor() {
           <div className="px-12 py-8 bg-black/40 border-t border-white/5 flex justify-end">
             <button
               onClick={handlePublish}
-              className="flex items-center gap-4 px-12 hover:cursor-pointer py-5 bg-linear-to-r from-indigo-600 to-blue-600 text-white rounded-full text-[11px] font-black tracking-widest uppercase hover:scale-105 active:scale-95 transition-all shadow-xl shadow-indigo-500/20"
+              disabled={isPublishing}
+              className="flex items-center gap-4 px-12 hover:cursor-pointer py-5 bg-linear-to-r from-indigo-600 to-blue-600 text-white rounded-full text-[11px] font-black tracking-widest uppercase hover:scale-105 active:scale-95 transition-all shadow-xl shadow-indigo-500/20 disabled:opacity-50 disabled:cursor-wait"
             >
-              <Send className="w-4 h-4" /> Sync To Mesh
+              <Send className="w-4 h-4" /> {isPublishing ? "Syncing..." : "Sync To Mesh"}
             </button>
           </div>
         </div>

@@ -51,6 +51,13 @@ export const apiSlice = createApi({
     getOneBlog: builder.query({
       query: (id) => `api/jvai_insider/get_individual_article/${id}/`,
     }),
+    postBlog: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: `api/jvai_insider/create_article/`,
+        body: data,
+      }),
+    }),
     submitContact: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -84,6 +91,7 @@ export const {
   useSubscribeUpdateMutation,
   useGetOneBlogQuery,
   useGetAllBlogQuery,
+  usePostBlogMutation,
   useSubmitContactMutation,
   useGetFaQQuery,
   useSendToBotMutation,
