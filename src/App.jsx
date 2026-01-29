@@ -3,6 +3,7 @@ import "./App.css";
 import { Outlet } from "react-router";
 import LoadingScreen from "./components/Loading";
 import { useGetSeoQuery } from "../redux/features/apiSlice";
+import SupportChat from "./pages/Landing/Bot/SupportChat";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -43,6 +44,7 @@ export default function App() {
       >
         <Outlet />
       </div>
+      <SupportChat />
     </div>
   );
 }
