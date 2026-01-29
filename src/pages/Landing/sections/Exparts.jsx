@@ -10,71 +10,18 @@ import {
   ChevronRight,
   MoveHorizontal,
 } from "lucide-react";
+import { useGetExpertsQuery, baseUri } from "../../../../redux/features/apiSlice";
 
 const Experts = () => {
   const containerRef = useRef(null);
   const sliderRef = useRef(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
-  const EXPERTS = [
-    {
-      id: 1,
-      name: "Alex Thorne",
-      role: "Lead Systems Architect",
-      specialty: ["Rust", "WASM", "Distributed Systems"],
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
-    },
-    {
-      id: 2,
-      name: "Elena Vance",
-      role: "Head of AI Research",
-      specialty: ["PyTorch", "NLP", "Generative Models"],
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop",
-    },
-    {
-      id: 3,
-      name: "Marcus Kael",
-      role: "Visual Technologist",
-      specialty: ["Three.js", "GLSL", "Creative Coding"],
-      image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop",
-    },
-    {
-      id: 4,
-      name: "Sonia Ray",
-      role: "Interaction Director",
-      specialty: ["React", "Framer Motion", "UX Design"],
-      image:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop",
-    },
-    {
-      id: 5,
-      name: "Julian Voss",
-      role: "Security Principal",
-      specialty: ["Solidity", "Zero-Knowledge", "Cryptography"],
-      image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop",
-    },
-    {
-      id: 6,
-      name: "Rina Sato",
-      role: "Platform Engineer",
-      specialty: ["Kubernetes", "Go", "Cloud Architecture"],
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
-    },
-    {
-      id: 7,
-      name: "David Chen",
-      role: "MLOps Specialist",
-      specialty: ["TensorFlow", "CUDA", "Edge AI"],
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1000&auto=format&fit=crop",
-    },
-  ];
+  
+  const { data, isLoading } = useGetExpertsQuery();
+  const experts = data?.Data || [];
+
   useEffect(() => {
-    if (sliderRef.current && containerRef.current) {
+    if (sliderRef.current && containerRef.current && experts.length > 0) {
       const sliderWidth = sliderRef.current.scrollWidth;
       const containerWidth = containerRef.current.offsetWidth;
       setDragConstraints({
@@ -82,7 +29,15 @@ const Experts = () => {
         right: 0,
       });
     }
-  }, []);
+  }, [experts]);
+
+  if (isLoading) {
+    return (
+      <div className="py-32 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   const scrollLeft = () => {
     if (containerRef.current) {
@@ -157,67 +112,100 @@ const Experts = () => {
           className="flex gap-8 px-6 md:px-12 pb-12"
           style={{ width: "max-content" }}
         >
-          {EXPERTS.map((expert, idx) => (
-            <motion.div
-              key={expert.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.05, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="group relative w-[320px] md:w-95 bg-[#0a0a0a] rounded-[40px] overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-500 shrink-0"
-            >
-              {/* Image Container */}
-              <div className="aspect-[3/3.5] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
-                <img
-                  src={expert.image}
-                  alt={expert.name}
-                  draggable={false}
-                  className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700 pointer-events-none"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent opacity-90" />
+          {experts.map((expert, idx) => {
+            const imageUrl = expert.expert_picture?.startsWith("http")
+              ? expert.expert_picture
+              : `${baseUri}${expert.expert_picture}`;
+            
+            // Dynamic specialties based on designation (Stable/Deterministic)
+            const getExpertSpecialties = (designation, expertId) => {
+              const d = designation?.toLowerCase() || "";
+              const frontendPool = ["React.js",  "Framer Motion","Three.js","Next.js", "WASM",  "Tailwind CSS"];
+              const backendPool = ["Django", "Go Lang", "System Design", "Rust", "PostgreSQL", "Cloud Arch"];
+              const designPool = ["UI/UX", "Visual ID", "Motion Design", "3D Art", "Product Design", "Art Direction"];
+              const aiPool = ["PyTorch", "NLP", "LLM Ops", "Generative AI", "Neural Nets", "Computer Vision"];
 
-                {/* Tech Stream Overlays */}
-                <div className="absolute bottom-5 right-8 flex flex-col gap-2 items-end">
-                  {expert.specialty.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="text-[9px] font-black uppercase tracking-widest bg-black/60 backdrop-blur-xl text-white/70 px-4 py-1.5 rounded-full border border-white/10 group-hover:border-blue-500/40 group-hover:text-blue-400 transition-all duration-500"
-                    >
-                      {tech}
+              let pool = [];
+              if (d.includes("ai") || d.includes("ml")) pool = aiPool;
+              else if (d.includes("front")) pool = frontendPool;
+              else if (d.includes("back") || d.includes("engineer")) pool = backendPool;
+              else if (d.includes("design")) pool = designPool;
+              else pool = [...frontendPool, ...backendPool];
+
+              // Deterministic selection based on ID to avoid flickering
+              const index1 = (expertId * 7) % pool.length;
+              const index2 = (expertId * 13) % pool.length;
+              const finalTags = [pool[index1]];
+              if (index1 !== index2) finalTags.push(pool[index2]);
+              else finalTags.push(pool[(index1 + 1) % pool.length]);
+              
+              return finalTags;
+            };
+            
+            const specialties = getExpertSpecialties(expert.expert_designation, expert.id);
+
+            return (
+              <motion.div
+                key={expert.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.05, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="group relative w-[320px] md:w-95 bg-[#0a0a0a] rounded-[40px] overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-500 shrink-0"
+              >
+                {/* Image Container */}
+                <div className="aspect-[3/3.5] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+                  <img
+                    src={imageUrl}
+                    alt={expert.expert_name}
+                    draggable={false}
+                    className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700 pointer-events-none"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent opacity-90" />
+
+                  {/* Tech Stream Overlays */}
+                  <div className="absolute bottom-5 right-8 flex flex-col gap-2 items-end">
+                    {specialties.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="text-[9px] font-black uppercase tracking-widest bg-black/60 backdrop-blur-xl text-white/70 px-4 py-1.5 rounded-full border border-white/10 group-hover:border-blue-500/40 group-hover:text-blue-400 transition-all duration-500"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Info Area */}
+                <div className="p-10 relative">
+                  <div className="flex items-center gap-3 mb-3 text-white/30 group-hover:text-blue-500 transition-colors">
+                    <Terminal size={14} className="group-hover:animate-pulse" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
+                      {expert.expert_designation}
                     </span>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                  <h3 className="text-3xl font-bold font-heading mb-1 text-white group-hover:tracking-tight transition-all duration-500 uppercase">
+                    {expert.expert_name}
+                  </h3>
 
-              {/* Info Area */}
-              <div className="p-10 relative">
-                <div className="flex items-center gap-3 mb-3 text-white/30 group-hover:text-blue-500 transition-colors">
-                  <Terminal size={14} className="group-hover:animate-pulse" />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
-                    {expert.role}
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold font-heading mb-1 text-white group-hover:tracking-tight transition-all duration-500">
-                  {expert.name}
-                </h3>
+                  <div className="flex gap-4 mt-6 opacity-20 group-hover:opacity-100 transition-all duration-700 transform group-hover:translate-x-2">
+                    <Code2
+                      size={18}
+                      className="hover:text-blue-400 cursor-help"
+                    />
+                    <Database
+                      size={18}
+                      className="hover:text-blue-400 cursor-help"
+                    />
+                    <Cpu size={18} className="hover:text-blue-400 cursor-help" />
+                  </div>
 
-                <div className="flex gap-4 mt-6 opacity-20 group-hover:opacity-100 transition-all duration-700 transform group-hover:translate-x-2">
-                  <Code2
-                    size={18}
-                    className="hover:text-blue-400 cursor-help"
-                  />
-                  <Database
-                    size={18}
-                    className="hover:text-blue-400 cursor-help"
-                  />
-                  <Cpu size={18} className="hover:text-blue-400 cursor-help" />
+                  {/* Cyberpunk Scanline Effect */}
+                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-blue-500/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
                 </div>
-
-                {/* Cyberpunk Scanline Effect */}
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-blue-500/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
 

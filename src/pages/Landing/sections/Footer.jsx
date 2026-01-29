@@ -151,7 +151,7 @@ const Footer = () => {
             <div className="flex space-x-4 text-lg">
               <Link
                 target="_blank"
-                to="https://www.facebook.com/hello.jvai"
+                to="https://www.facebook.com/joinventureai/"
                 className="bg-white/5 hover:bg-blue-600 text-white p-3 rounded-full transition-all border border-white/10 hover:border-blue-600 hover:scale-110"
               >
                 <FaFacebookF size={18} />

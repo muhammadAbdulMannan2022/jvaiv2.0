@@ -7,235 +7,10 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { Maximize2, Move, Sparkles } from "lucide-react";
-const TESTIMONIALS = [
-  {
-    id: 1,
-    author: "Jane Cooper",
-    role: "CEO, StartupX",
-    quote:
-      "JVAI delivered our web platform insanely fast. Clean code, smooth UX, zero headaches.",
-    logo: "/logo.png",
-  },
-  {
-    id: 2,
-    author: "Floyd Miles",
-    role: "CTO, Fintech Labs",
-    quote:
-      "Their LLM integration took our product to the next level. Smart, scalable, and future-proof.",
-    logo: "/logo.png",
-  },
-  {
-    id: 3,
-    author: "Kristin Watson",
-    role: "Founder, SaaSly",
-    quote:
-      "JVAI understands startups. From idea to production, everything felt effortless.",
-    logo: "/logo.png",
-  },
-  {
-    id: 4,
-    author: "Guy Hawkins",
-    role: "Product Manager, CloudCore",
-    quote:
-      "The mobile app performance is top-tier. Our users noticed the difference immediately.",
-    logo: "/logo.png",
-  },
-  {
-    id: 5,
-    author: "Arlene McCoy",
-    role: "Head of Ops, RetailPro",
-    quote:
-      "Their NLP solutions automated 70% of our customer support. Huge win for our team.",
-    logo: "/logo.png",
-  },
-  {
-    id: 6,
-    author: "Bessie Cooper",
-    role: "VP Engineering, ScaleAI",
-    quote:
-      "JVAI’s architecture decisions saved us months of refactoring. Solid engineering.",
-    logo: "/logo.png",
-  },
-  {
-    id: 7,
-    author: "Dianne Russell",
-    role: "Founder, CreatorHub",
-    quote:
-      "They turned a rough idea into a polished product. Design + tech combo is elite.",
-    logo: "/logo.png",
-  },
-  {
-    id: 8,
-    author: "Ronald Richards",
-    role: "Security Lead, PaySecure",
-    quote:
-      "Secure, reliable, and well-documented. JVAI takes best practices seriously.",
-    logo: "/logo.png",
-  },
-  {
-    id: 9,
-    author: "Cody Fisher",
-    role: "UX Designer, SoftWorks",
-    quote:
-      "The UI/UX work was clean, modern, and user-focused. Exactly what we wanted.",
-    logo: "/logo.png",
-  },
-  {
-    id: 10,
-    author: "Savannah Nguyen",
-    role: "COO, HealthTech Inc",
-    quote: "JVAI shipped our MVP faster than expected without cutting corners.",
-    logo: "/logo.png",
-  },
-  {
-    id: 11,
-    author: "Jerome Bell",
-    role: "Lead Developer, DevHouse",
-    quote: "Code quality is top-notch. Easy to maintain and scale.",
-    logo: "/logo.png",
-  },
-  {
-    id: 12,
-    author: "Leslie Alexander",
-    role: "Founder, EduSmart",
-    quote:
-      "Their AI-powered features made our learning platform stand out instantly.",
-    logo: "/logo.png",
-  },
-  {
-    id: 13,
-    author: "Brooklyn Simmons",
-    role: "Marketing Director, Brandify",
-    quote:
-      "JVAI built tools that actually convert. The results speak for themselves.",
-    logo: "/logo.png",
-  },
-  {
-    id: 14,
-    author: "Courtney Henry",
-    role: "Product Owner, WorkflowX",
-    quote: "Communication was smooth and transparent throughout the project.",
-    logo: "/logo.png",
-  },
-  {
-    id: 15,
-    author: "Wade Warren",
-    role: "CEO, LogiChain",
-    quote:
-      "Their backend systems handle scale like a champ. No downtime, no stress.",
-    logo: "/logo.png",
-  },
-  {
-    id: 16,
-    author: "Esther Howard",
-    role: "HR Tech Lead, PeopleOps",
-    quote:
-      "JVAI automated our internal tools with smart AI workflows. Super efficient.",
-    logo: "/logo.png",
-  },
-  {
-    id: 17,
-    author: "Cameron Williamson",
-    role: "CTO, TravelNow",
-    quote:
-      "The mobile-first approach really paid off. Performance is buttery smooth.",
-    logo: "/logo.png",
-  },
-  {
-    id: 18,
-    author: "Eleanor Pena",
-    role: "Founder, LegalTech Pro",
-    quote:
-      "Their NLP models handled complex documents with impressive accuracy.",
-    logo: "/logo.png",
-  },
-  {
-    id: 19,
-    author: "Ralph Edwards",
-    role: "Engineering Manager, Buildify",
-    quote: "JVAI feels like an extension of our in-house team.",
-    logo: "/logo.png",
-  },
-  {
-    id: 20,
-    author: "Annette Black",
-    role: "Product Strategist, VisionAI",
-    quote: "They don’t just build software — they think product.",
-    logo: "/logo.png",
-  },
-  {
-    id: 21,
-    author: "Jacob Jones",
-    role: "Founder, AnalyticsHub",
-    quote:
-      "Our data pipelines and AI models are now rock solid thanks to JVAI.",
-    logo: "/logo.png",
-  },
-  {
-    id: 22,
-    author: "Theresa Webb",
-    role: "Operations Lead, FleetOps",
-    quote: "Automation reduced our manual workload massively. ROI was instant.",
-    logo: "/logo.png",
-  },
-  {
-    id: 23,
-    author: "Albert Flores",
-    role: "CEO, MediaStack",
-    quote: "JVAI nailed both performance and aesthetics. Rare combo.",
-    logo: "/logo.png",
-  },
-  {
-    id: 24,
-    author: "Kathryn Murphy",
-    role: "Tech Consultant",
-    quote: "Their system design choices were clean, modern, and scalable.",
-    logo: "/logo.png",
-  },
-  {
-    id: 25,
-    author: "Marvin McKinney",
-    role: "Founder, EcomBoost",
-    quote: "Our conversion rates improved after the JVAI rebuild. Big W.",
-    logo: "/logo.png",
-  },
-  {
-    id: 26,
-    author: "Kristin Hayes",
-    role: "AI Researcher",
-    quote:
-      "JVAI knows how to ship AI features that actually work in production.",
-    logo: "/logo.png",
-  },
-  {
-    id: 27,
-    author: "Darlene Robertson",
-    role: "Product Lead, FinServe",
-    quote: "From APIs to dashboards, everything was thoughtfully executed.",
-    logo: "/logo.png",
-  },
-  {
-    id: 28,
-    author: "Darrell Steward",
-    role: "CTO, RealEstateTech",
-    quote: "Their platform handles real-time data flawlessly.",
-    logo: "/logo.png",
-  },
-  {
-    id: 29,
-    author: "Ali Hassan",
-    role: "Startup Founder",
-    quote: "JVAI helped us go from zero to launch without chaos.",
-    logo: "/logo.png",
-  },
-  {
-    id: 30,
-    author: "Sofia Martinez",
-    role: "Product Designer",
-    quote: "The collaboration was smooth, fast, and honestly fun.",
-    logo: "/logo.png",
-  },
-];
+import {
+  useGetClientReviewsQuery,
+  baseUri,
+} from "../../../../redux/features/apiSlice";
 
 const SpatialCard = ({ item, panX, panY }) => {
   const distance = useTransform([panX, panY], ([currX, currY]) => {
@@ -251,7 +26,7 @@ const SpatialCard = ({ item, panX, panY }) => {
   const blur = useTransform(
     distance,
     [0, 500, 1000],
-    ["blur(0px)", "blur(2px)", "blur(8px)"]
+    ["blur(0px)", "blur(2px)", "blur(8px)"],
   );
   const zIndex = useTransform(distance, [0, 500, 1000], [100, 50, 1]);
 
@@ -261,7 +36,7 @@ const SpatialCard = ({ item, panX, panY }) => {
     [
       "0 50px 100px -20px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.1)",
       "0 20px 40px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)",
-    ]
+    ],
   );
 
   return (
@@ -281,18 +56,18 @@ const SpatialCard = ({ item, panX, panY }) => {
         translateX: "-50%",
         translateY: "-50%",
       }}
-      className={`shrink-0 bg-white rounded-[48px] p-12 text-[#050505] transition-[background-color] duration-500 ease-out flex flex-col justify-between group w-full h-auto md:w-112.5 md:h-105`}
+      className={`shrink-0 bg-white rounded-4xl md:rounded-[48px] p-8 md:p-12 text-[#050505] transition-[background-color] duration-500 ease-out flex flex-col justify-between group w-[85vw] h-auto md:w-112.5 md:h-105`}
     >
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
-            <div className="w-auto h-12">
-              <img
-                src={item.logo}
-                alt="brand"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {/* <div className="w-12 h-12 rounded-xl overflow-hidden bg-slate-50 border border-slate-100 flex items-center justify-center p-2"> */}
+            <img
+              src="/logo.png"
+              alt="brand"
+              className="w-full h-12 object-contain"
+            />
+            {/* </div> */}
           </div>
           <motion.div
             style={{ opacity: useTransform(distance, [0, 150], [1, 0]) }}
@@ -302,19 +77,32 @@ const SpatialCard = ({ item, panX, panY }) => {
           </motion.div>
         </div>
 
-        <p className="text-2xl font-extrabold leading-[1.15] mb-6 tracking-tight text-slate-900 line-clamp-5">
+        <p
+          className="text-lg md:text-xl font-extrabold leading-[1.15] mb-6 tracking-tight text-slate-900 line-clamp-6"
+          title={item.quote}
+        >
           "{item.quote}"
         </p>
       </div>
 
       <div className="mt-auto border-t border-gray-100 pt-8 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-400">
-            {item.author.charAt(0)}
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-100 overflow-hidden flex items-center justify-center font-bold text-slate-400 border border-slate-200">
+            {item.logo ? (
+              <img
+                src={item.logo}
+                alt={item.author}
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              />
+            ) : (
+              item.author.charAt(0)
+            )}
           </div>
           <div>
-            <h4 className="font-black text-lg text-slate-900">{item.author}</h4>
-            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">
+            <h4 className="font-black text-base md:text-lg text-slate-900">
+              {item.author}
+            </h4>
+            <p className="text-[10px] md:text-xs text-slate-400 font-bold uppercase tracking-widest">
               {item.role}
             </p>
           </div>
@@ -333,6 +121,37 @@ const Testimonials = () => {
 
   const springX = useSpring(panX, { stiffness: 35, damping: 25 });
   const springY = useSpring(panY, { stiffness: 35, damping: 25 });
+
+  const { data, isLoading } = useGetClientReviewsQuery();
+  const rawTestimonials = data?.Data || [];
+
+  // Map and prepare testimonials for the spatial grid
+  const testimonials = rawTestimonials.map((t, i) => {
+    const imageUrl = t.client_picture?.startsWith("http")
+      ? t.client_picture
+      : `${baseUri}${t.client_picture}`;
+
+    return {
+      id: t.id,
+      author: t.client_name,
+      role: t.client_profession,
+      quote: t.client_feedback,
+      logo: imageUrl,
+      rotation: ((i * 13) % 20) - 10,
+    };
+  });
+
+  // These transforms must always be called, even if data is loading
+  const bgX = useTransform(springX, (v) => v * 0.12);
+  const bgY = useTransform(springY, (v) => v * 0.12);
+
+  if (isLoading) {
+    return (
+      <div className="h-[90vh] flex items-center justify-center bg-[#050505]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -358,8 +177,8 @@ const Testimonials = () => {
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
             style={{
-              x: useTransform(springX, (v) => v * 0.12),
-              y: useTransform(springY, (v) => v * 0.12),
+              x: bgX,
+              y: bgY,
             }}
             className="absolute inset-[-50%] flex items-center justify-center"
           >
@@ -373,17 +192,7 @@ const Testimonials = () => {
 
         {/* Central Focus Marker - Adjusted visual weight */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-          <div className="relative">
-            {/* <motion.div
-            animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.1, 0.05] }}
-            transition={{ duration: 5, repeat: Infinity }}
-            className="w-[550px] h-[550px] border border-white/5 rounded-full"
-          /> */}
-            {/* <div className="absolute inset-0 flex items-center justify-center opacity-20">
-            <div className="w-px h-32 bg-linear-to-t from-transparent via-blue-500 to-transparent" />
-            <div className="absolute w-32 h-px bg-linear-to-r from-transparent via-blue-500 to-transparent" />
-          </div> */}
-          </div>
+          <div className="relative"></div>
         </div>
 
         {/* Infinite Draggable Canvas */}
@@ -402,8 +211,8 @@ const Testimonials = () => {
           }}
         >
           <div className="relative w-full h-full">
-            {TESTIMONIALS.map((t, i) => {
-              const totalItems = TESTIMONIALS.length;
+            {testimonials.map((t, i) => {
+              const totalItems = testimonials.length;
               const gridSize = Math.ceil(Math.sqrt(totalItems));
               const offset = Math.floor(gridSize / 2);
 
@@ -412,9 +221,8 @@ const Testimonials = () => {
 
               const layoutItem = {
                 ...t,
-                x: col * 500,
-                y: row * 500,
-                rotation: ((i * 13) % 20) - 10,
+                x: col * 600, // Increased spacing for cards
+                y: row * 600,
                 baseScale: 1,
               };
               return (
@@ -446,15 +254,23 @@ const Testimonials = () => {
             <div className="w-px h-6 bg-white/10" />
             <div className="flex items-center gap-4">
               <div className="flex -space-x-3">
-                {Array.from({ length: 4 }).map((_, i) => (
+                {testimonials.slice(0, 4).map((t, i) => (
                   <div
-                    key={i}
-                    className="w-8 h-8 rounded-full border-2 border-black bg-slate-800"
-                  />
+                    key={t.id}
+                    className="w-8 h-8 rounded-full border-2 border-black bg-slate-800 overflow-hidden"
+                  >
+                    <img
+                      src={t.logo}
+                      alt="client"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 ))}
-                <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black bg-slate-800">
-                  +
-                </div>
+                {testimonials.length > 4 && (
+                  <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black bg-slate-800 text-[10px] font-bold">
+                    +{testimonials.length - 4}
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
