@@ -1,51 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-import { X, PlayCircle } from "lucide-react";
+import { X, PlayCircle, CheckCircle2 } from "lucide-react";
 import Scene from "../../../components/services/Sceane";
 import ServiceCard from "../../../components/services/ServiceCard";
-import ModelViewer from "../../../components/services/ModelViewer";
-
-const SERVICES = [
-  {
-    id: 1,
-    title: "Editorial Design",
-    category: "Visual Identity",
-    img: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop",
-    model: "/bot.glb",
-  },
-  {
-    id: 2,
-    title: "Interaction",
-    category: "Motion Systems",
-    img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop",
-    model: "/bot.glb",
-  },
-  {
-    id: 3,
-    title: "3D Art Direction",
-    category: "Creative Dev",
-    img: "https://images.unsplash.com/photo-1633167606207-d840b5070fc2?q=80&w=2000&auto=format&fit=crop",
-    model: "/bot.glb",
-  },
-  {
-    id: 4,
-    title: "Future of AI",
-    category: "Strategic Design",
-    img: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000&auto=format&fit=crop",
-    model: "/bot.glb",
-  },
-  {
-    id: 5,
-    title: "Modern Web",
-    category: "Fullstack Mastery",
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop",
-    model: "/bot.glb",
-  },
-];
+import VideoPlayer from "../../../components/VideoPlayer";
+import { useGetAllCategoriesQuery } from "../../../../redux/features/apiSlice";
 
 const App = ({ titleClass }) => {
   const [selectedService, setSelectedService] = useState(null);
+  const { data: categoriesData, isLoading } = useGetAllCategoriesQuery();
+
+  // Handle body scroll lock
+  useEffect(() => {
+    if (selectedService) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedService]);
+
+  const services = categoriesData?.Data || [];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-[#050505] text-white selection:bg-white selection:text-black">
@@ -86,10 +71,15 @@ const App = ({ titleClass }) => {
 
         {/* Services Grid */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
-          {SERVICES.map((service, idx) => (
+          {services.map((service, idx) => (
             <ServiceCard
               key={service.id}
-              service={service}
+              service={{
+                ...service,
+                title: service.category_name,
+                category: "Service Excellence",
+                img: service.category_background_image,
+              }}
               index={idx}
               onSelect={(s) => setSelectedService(s)}
             />
@@ -122,76 +112,122 @@ const App = ({ titleClass }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 flex items-center justify-center p-6 bg-black/50 backdrop-blur-xl"
+            className="fixed inset-0 z-9999 flex items-center justify-center p-4 md:p-6 bg-black/10 backdrop-blur-xl h-screen"
             onClick={() => setSelectedService(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, y: 50 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 50 }}
-              className="bg-[#0f0f0f] border border-white/10 w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-auto max-h-[90vh]"
+              initial={{ scale: 0.9, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 50, opacity: 0 }}
+              className="bg-[#0a0a0a] border border-white/10 w-full max-w-6xl rounded-4xl md:rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row h-full max-h-[90vh] md:max-h-[80vh] relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
-                {selectedService.model ? (
-                  <ModelViewer modelPath={selectedService.model} />
+              {/* Close Button - Responsive Position */}
+              <button
+                onClick={() => setSelectedService(null)}
+                className="absolute top-4 right-4 md:top-8 md:right-8 z-110 p-3 bg-black/60 md:bg-white/5 hover:bg-white/10 rounded-full transition-all hover:scale-110 hover:cursor-pointer group backdrop-blur-md border border-white/10"
+              >
+                <X
+                  size={20}
+                  className="group-hover:rotate-90 transition-transform duration-300"
+                />
+              </button>
+
+              {/* Media Section */}
+              <div className="w-full md:w-[55%] relative h-[30vh] md:h-auto overflow-hidden bg-black shrink-0">
+                {selectedService.category_video ? (
+                  <VideoPlayer
+                    url={selectedService.category_video}
+                    poster={selectedService.category_background_image}
+                    className="w-full h-full object-cover"
+                  />
                 ) : (
-                  <>
-                    <img
-                      src={selectedService.img}
-                      alt={selectedService.title}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-r from-black/50 to-transparent" />
-                  </>
+                  <img
+                    src={selectedService.category_background_image}
+                    alt={selectedService.category_name}
+                    className="absolute inset-0 w-full h-full object-cover opacity-60"
+                  />
                 )}
               </div>
-              <div className="md:w-1/2 p-8 md:p-16 flex flex-col justify-center">
-                <div className="flex justify-between items-start mb-12">
-                  <div>
-                    <span className="text-blue-500 text-xs font-bold uppercase tracking-[0.4em]">
-                      {selectedService.category}
-                    </span>
-                    <h2 className="text-4xl md:text-6xl font-heading font-bold mt-2">
-                      {selectedService.title}
-                    </h2>
+
+              {/* Content Section */}
+              <div className="w-full md:w-[45%] p-6 md:p-12 flex flex-col overflow-y-auto custom-scrollbar">
+                <div className="mb-8 mt-4 md:mt-0">
+                  <span className="text-blue-500 text-[10px] md:text-xs font-black uppercase tracking-[0.4em] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+                    Expertise
+                  </span>
+                  <h2 className="text-3xl md:text-5xl font-heading font-black mt-4 tracking-tighter leading-tight">
+                    {selectedService.category_name}
+                  </h2>
+                </div>
+
+                <div className="prose prose-invert max-w-none mb-10">
+                  <p className="text-base md:text-lg text-white/70 font-light leading-relaxed whitespace-pre-line">
+                    {selectedService.category_description}
+                  </p>
+                </div>
+
+                {selectedService.key_points &&
+                  selectedService.key_points.length > 0 && (
+                    <div className="space-y-6 mb-10">
+                      <h4 className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white/30 border-b border-white/5 pb-3">
+                        Key Objectives
+                      </h4>
+                      <div className="grid grid-cols-1 gap-3 md:gap-4">
+                        {selectedService.key_points.map((point, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1 * i }}
+                            className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-blue-500/30 transition-colors"
+                          >
+                            <CheckCircle2 className="w-5 h-5 text-blue-500 mt-0.5 shrink-0" />
+                            <span className="text-sm font-medium text-white/80 leading-snug">
+                              {point.point_name}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                {(selectedService.category_left_picture ||
+                  selectedService.category_right_picture) && (
+                  <div className="space-y-6">
+                    <h4 className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white/30 border-b border-white/5 pb-3">
+                      Visual References
+                    </h4>
+                    <div className="grid grid-cols-2 gap-3 md:gap-4">
+                      {selectedService.category_left_picture && (
+                        <div className="group relative overflow-hidden rounded-2xl aspect-square bg-white/5 border border-white/10">
+                          <img
+                            src={selectedService.category_left_picture}
+                            alt="Left Detail"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                        </div>
+                      )}
+                      {selectedService.category_right_picture && (
+                        <div className="group relative overflow-hidden rounded-2xl aspect-square bg-white/5 border border-white/10">
+                          <img
+                            src={selectedService.category_right_picture}
+                            alt="Right Detail"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <button
-                    onClick={() => setSelectedService(null)}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors hover:cursor-pointer"
-                  >
-                    <X size={24} />
+                )}
+
+                <div className="mt-12 pt-8 border-t border-white/5">
+                  <button className="w-full bg-blue-600 text-white py-4 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm hover:bg-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all transform hover:-translate-y-1">
+                    Inquire for Project
                   </button>
                 </div>
-                <p className="text-xl text-white/70 font-light leading-relaxed mb-12">
-                  {selectedService.description}
-                </p>
-                <div className="space-y-6">
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 border-b border-white/5 pb-2">
-                    Key Outcomes
-                  </h4>
-                  <ul className="grid grid-cols-2 gap-4 text-sm font-medium">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                      Enhanced Visual Impact
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                      Strategic Differentiation
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                      Future-Proof Tech Stack
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                      Seamless Accessibility
-                    </li>
-                  </ul>
-                </div>
-                <button className="mt-16 bg-white text-black py-5 rounded-2xl font-bold uppercase tracking-widest text-sm hover:bg-blue-500 hover:text-white transition-all">
-                  Inquire for Project
-                </button>
               </div>
             </motion.div>
           </motion.div>
