@@ -2,67 +2,11 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Link } from "react-router";
 import WorkSection from "./WorkSection";
-export const PROJECTS = [
-  {
-    id: "p1",
-    title: "Aether Neural Engine",
-    category: "AI Infrastructure",
-    description:
-      "A real-time edge processing engine for autonomous drone swarms.",
-    fullDescription:
-      "The Aether Neural Engine was designed to solve the critical latency issues in autonomous aerial navigation. By deploying quantized neural networks directly to the edge, we achieved a 40% reduction in response time, enabling drones to navigate complex obstacle courses at speeds previously thought impossible for consumer-grade hardware.",
-    videoUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    client: "Skyward Autonomy",
-    year: "2024",
-    techStack: ["C++", "TensorRT", "Nvidia Jetson", "ROS2"],
-    results: [
-      "40% reduction in navigation latency",
-      "Successful deployment in 5 countries",
-      "Zero collision incidents in testing",
-    ],
-  },
-  {
-    id: "p2",
-    title: "Cognito Chat Interface",
-    category: "LLM & UX",
-    description: "A custom-trained RAG system for a Fortune 500 legal firm.",
-    fullDescription:
-      "Cognito is not just another wrapper. It leverages a sophisticated RAG architecture combined with a custom-fine-tuned Llama model to process and synthesize legal precedents. The system understands the nuances of contract law and can generate draft arguments with citations to relevant internal case history within seconds.",
-    videoUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    client: "Heritage Legal Group",
-    year: "2023",
-    techStack: ["Python", "Pinecone", "LangChain", "Next.js"],
-    results: [
-      "85% faster case research",
-      "99.2% citation accuracy",
-      "Secure on-premise deployment",
-    ],
-  },
-  {
-    id: "p3",
-    title: "Nebula Dashboard",
-    category: "Web Experience",
-    description:
-      "An immersive 3D data visualization dashboard for global supply chain monitoring.",
-    fullDescription:
-      "Nebula transforms static spreadsheet data into a living, breathing 3D representation of global logistics. Using WebGL and high-performance data pipelines, it allows stakeholders to zoom from a planetary view down to individual shipping containers, identifying bottlenecks before they impact the bottom line.",
-    videoUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    client: "Oceanic Logistics",
-    year: "2024",
-    techStack: ["Three.js", "React", "D3.js", "WebSockets"],
-    results: [
-      "Real-time tracking of 500k+ assets",
-      "Intuitive VR-ready interface",
-      "15% improvement in route efficiency",
-    ],
-  },
-];
+import { useGetProjectsQuery } from "../../../redux/features/apiSlice";
 
 const AboutPage = () => {
   const pageRef = useRef(null);
+  const { data: projects, isLoading } = useGetProjectsQuery();
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -101,7 +45,15 @@ const AboutPage = () => {
         },
       },
     );
-  }, []);
+  }, [projects]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div ref={pageRef} className="pb-20">
@@ -110,7 +62,7 @@ const AboutPage = () => {
         <div className="w-full h-full py-14 bg-black/50">
           <div className="max-w-5xl mx-auto text-center">
             <span className="about-hero-text inline-block px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold tracking-widest uppercase mb-8">
-              The Nexus Story
+              The JVAI Story
             </span>
             <h1 className="about-hero-text text-5xl md:text-8xl font-black mb-10 tracking-tighter leading-none">
               Architects of <br />
@@ -166,7 +118,7 @@ const AboutPage = () => {
       </section>
 
       {/* 3. Works Section (Video + Text) */}
-      <WorkSection PROJECTS={PROJECTS} />
+      <WorkSection PROJECTS={projects || []} />
 
       {/* 4. Values Section */}
       <section className="values-section px-6 pt-40 mb-20">

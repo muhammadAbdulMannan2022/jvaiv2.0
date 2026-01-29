@@ -259,7 +259,7 @@ const JobDetails = () => {
                 </label>
                 <textarea
                   rows={4}
-                  placeholder="Tell us why you belong at Nexus..."
+                  placeholder="Tell us why you belong at JVAI..."
                   className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
                 />
               </div>

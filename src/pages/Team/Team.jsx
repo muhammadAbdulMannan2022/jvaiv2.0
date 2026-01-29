@@ -9,7 +9,7 @@ export const TEAM_MEMBERS = [
     role: "General Manager",
     department: "GM",
     color: "#ffffff",
-    bio: "Sarah is the master architect of the Nexus vision. She synchronizes all departmental nodes to ensure the company moves as a single high-performance entity.",
+    bio: "Sarah is the master architect of the JVAI vision. She synchronizes all departmental nodes to ensure the company moves as a single high-performance entity.",
     image:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     connection: "Central Processing Hub: Directing all strategic vectors.",
@@ -63,7 +63,7 @@ export const TEAM_MEMBERS = [
     role: "VP of Business Development",
     department: "BizDev",
     color: "#a855f7",
-    bio: "The vision strategist. Saira identifies emerging sectors and forges high-level alliances to expand the Nexus ecosystem.",
+    bio: "The vision strategist. Saira identifies emerging sectors and forges high-level alliances to expand the JVAI ecosystem.",
     image:
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop",
     connection: "Expansion Module: Forging external strategic synapses.",
@@ -244,7 +244,7 @@ const TeamPage = () => {
           </h1>
           <div className="max-w-xl dossier-reveal">
             <p className="text-slate-500 text-lg md:text-xl font-light leading-relaxed">
-              Nexus Dynamics is not a traditional hierarchy. We are a
+              JVAI Dynamics is not a traditional hierarchy. We are a
               synchronized neural network of industry leaders, engineers, and
               strategists.
             </p>
@@ -266,7 +266,7 @@ const TeamPage = () => {
               </p>
             </div>
             <p className="hidden md:block">
-              Nexus Dynamics // HQ: Virtual // Protocol: Alpha-7
+              JVAI Dynamics // HQ: Virtual // Protocol: Alpha-7
             </p>
           </div>
         </div>

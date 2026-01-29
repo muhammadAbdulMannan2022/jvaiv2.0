@@ -31,7 +31,7 @@ export const JOB_POSTINGS = [
       "Unlimited research compute budget.",
       "Annual travel stipend for global conferences.",
       "Comprehensive health, dental, and vision insurance.",
-      "Equity ownership in Nexus Dynamics.",
+      "Equity ownership in JVAI Dynamics.",
     ],
   },
   {
@@ -236,7 +236,7 @@ const CareerPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="mb-24 text-center">
             <h2 className="text-4xl md:text-6xl font-black mb-6 text-white tracking-tighter">
-              Why <span className="text-blue-500">Nexus?</span>
+              Why <span className="text-blue-500">JVAI?</span>
             </h2>
             <p className="text-slate-500 max-w-xl mx-auto">
               Elite perks for an elite collective.
@@ -372,7 +372,7 @@ const CareerPage = () => {
               speculative data sync.
             </p>
             <a
-              href="mailto:talent@nexusdynamics.io"
+              href="mailto:talent@JVAIdynamics.io"
               className="group text-blue-400 font-black tracking-[0.2em] uppercase text-xs inline-flex items-center justify-center gap-4 transition-all"
             >
               Establish Direct Link

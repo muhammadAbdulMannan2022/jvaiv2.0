@@ -276,7 +276,7 @@ const ContactPage = () => {
       <div className="max-w-7xl mx-auto px-6 py-12 border-t border-white/5 flex justify-between items-center text-[9px] font-black text-slate-600 tracking-widest uppercase relative z-10">
         <p>Security_Protocol: AES-256-GCM</p>
         <p>System_Time: {new Date().toISOString().slice(11, 19)} UTC</p>
-        <p className="hidden md:block">Nexus Dynamics Global Lattice v9.0</p>
+        <p className="hidden md:block">JVAI Dynamics Global Lattice v9.0</p>
       </div>
 
       <style

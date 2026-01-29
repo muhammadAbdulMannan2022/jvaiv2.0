@@ -42,7 +42,7 @@ const VideoPlayer = ({ url, poster, className = "", controls = false }) => {
       />
 
       {/* Overlay UI */}
-      <div
+      {!controls && <div
         className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-500 ${isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}
       >
         <button
@@ -63,7 +63,7 @@ const VideoPlayer = ({ url, poster, className = "", controls = false }) => {
             </svg>
           )}
         </button>
-      </div>
+      </div>}
 
       {/* Progress Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10">
