@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
+import { useSubmitContactMutation } from "../../../redux/features/apiSlice";
 
 const ContactPage = () => {
   const [formState, setFormState] = useState({
-    name: "",
+    full_name: "",
     email: "",
-    protocol: "AI",
-    message: "",
+    service: "AI Solutions",
+    project_budget: "Under $5,000",
+    project_details: "",
+    whatsapp_number: "",
   });
-  const [isTransmitting, setIsTransmitting] = useState(false);
+  const [submitContact, { isLoading: isTransmitting }] = useSubmitContactMutation();
   const [isSuccess, setIsSuccess] = useState(false);
   const formRef = useRef(null);
 
@@ -27,27 +30,23 @@ const ContactPage = () => {
     );
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsTransmitting(true);
 
-    // Simulate tactical transmission
-    setTimeout(() => {
-      setIsTransmitting(false);
+    try {
+      await submitContact(formState).unwrap();
       setIsSuccess(true);
       gsap.fromTo(
         ".success-msg",
         { opacity: 0, scale: 0.9 },
         { opacity: 1, scale: 1, duration: 0.5, ease: "back.out" },
       );
-    }, 2500);
+    } catch (err) {
+      alert("Transmission failed. Please check your data packets and retry.");
+      console.error(err);
+    }
   };
 
-  const sectors = [
-    { city: "San Francisco", coord: "37.7749° N, 122.4194° W", time: "PST" },
-    { city: "London", coord: "51.5074° N, 0.1278° W", time: "GMT" },
-    { city: "Berlin", coord: "52.5200° N, 13.4050° E", time: "CET" },
-  ];
 
   return (
     <div className="relative min-h-screen pt-24 bg-[#020617] overflow-hidden">
@@ -73,35 +72,7 @@ const ContactPage = () => {
               </p>
             </div>
 
-            <div className="space-y-8 contact-reveal">
-              <h2 className="text-[10px] font-black text-slate-600 tracking-[0.5em] uppercase">
-                Sector_Nodes
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {sectors.map((s, i) => (
-                  <div
-                    key={i}
-                    className="group p-8 glass border border-white/5 hover:border-indigo-500/30 transition-all duration-500"
-                  >
-                    <p className="text-[9px] font-black text-indigo-400 tracking-widest uppercase mb-4">
-                      Node_0{i + 1}
-                    </p>
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      {s.city}
-                    </h3>
-                    <p className="text-[10px] font-mono text-slate-500 mb-6">
-                      {s.coord}
-                    </p>
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                      <span className="text-[9px] font-black text-slate-300 tracking-widest uppercase">
-                        Active // {s.time}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            
 
             <div className="contact-reveal flex gap-12 pt-10 border-t border-white/5">
               <div>
@@ -149,7 +120,17 @@ const ContactPage = () => {
                     corresponding sector head.
                   </p>
                   <button
-                    onClick={() => setIsSuccess(false)}
+                    onClick={() => {
+                      setIsSuccess(false);
+                      setFormState({
+                        full_name: "",
+                        email: "",
+                        service: "AI Solutions",
+                        project_budget: "Under $5,000",
+                        project_details: "",
+                        whatsapp_number: "",
+                      });
+                    }}
                     className="px-12 py-4 bg-white text-slate-950 text-[10px] font-black tracking-widest uppercase hover:bg-teal-400 hover:text-white transition-all"
                   >
                     Reset Connection
@@ -159,52 +140,93 @@ const ContactPage = () => {
                 <form
                   ref={formRef}
                   onSubmit={handleSubmit}
-                  className="space-y-10 contact-reveal"
+                  className="space-y-8 contact-reveal"
                 >
-                  <div className="space-y-4">
-                    <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">
-                      Node_Name
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      placeholder="ENTER IDENTITY"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-indigo-500/50 font-mono text-sm tracking-wider"
-                      onChange={(e) =>
-                        setFormState({ ...formState, name: e.target.value })
-                      }
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-3">
+                        <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">
+                        Full Name
+                        </label>
+                        <input
+                        required
+                        type="text"
+                        placeholder="ENTER IDENTITY"
+                        value={formState.full_name}
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-indigo-500/50 font-mono text-sm tracking-wider"
+                        onChange={(e) =>
+                            setFormState({ ...formState, full_name: e.target.value })
+                        }
+                        />
+                    </div>
+
+                    <div className="space-y-3">
+                        <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">
+                        Data Return Link (Email)
+                        </label>
+                        <input
+                        required
+                        type="email"
+                        placeholder="USER@DOMAIN.SYS"
+                        value={formState.email}
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-indigo-500/50 font-mono text-sm tracking-wider"
+                        onChange={(e) =>
+                            setFormState({ ...formState, email: e.target.value })
+                        }
+                        />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-3">
+                        <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">
+                        Number
+                        </label>
+                        <input
+                        required
+                        type="text"
+                        placeholder="+X XXX XXX XXXX"
+                        value={formState.whatsapp_number}
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-indigo-500/50 font-mono text-sm tracking-wider"
+                        onChange={(e) =>
+                            setFormState({ ...formState, whatsapp_number: e.target.value })
+                        }
+                        />
+                    </div>
+
+                    <div className="space-y-3">
+                        <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">
+                        Project Budget Vector
+                        </label>
+                        <select
+                            required
+                            className="w-full bg-[#020617] border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-indigo-500/50 font-mono text-sm tracking-wider appearance-none cursor-pointer"
+                            value={formState.project_budget}
+                            onChange={(e) =>
+                                setFormState({ ...formState, project_budget: e.target.value })
+                            }
+                        >
+                            <option value="Under $1,000">Under $1,000</option>
+                            <option value="$1,000 - $5,000">$1,000 - $5,000</option>
+                            <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                            <option value="$10,000+">$10,000+</option>
+                        </select>
+                    </div>
                   </div>
 
                   <div className="space-y-4">
                     <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">
-                      Return_Link
-                    </label>
-                    <input
-                      required
-                      type="email"
-                      placeholder="name@domain.com"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-indigo-500/50 font-mono text-sm tracking-wider"
-                      onChange={(e) =>
-                        setFormState({ ...formState, email: e.target.value })
-                      }
-                    />
-                  </div>
-
-                  <div className="space-y-4">
-                    <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">
-                      Select_Protocol
+                      Select_Operational_Protocol
                     </label>
                     <div className="flex flex-wrap gap-3">
-                      {["AI", "LLM", "Web", "Venture"].map((p) => (
+                      {["AI Solutions", "UI/UX Design", "Web Engineering", "Venture Strategy"].map((p) => (
                         <button
                           key={p}
                           type="button"
                           onClick={() =>
-                            setFormState({ ...formState, protocol: p })
+                            setFormState({ ...formState, service: p })
                           }
-                          className={`px-6 py-2.5 rounded-full text-[9px] font-black tracking-widest uppercase border transition-all ${
-                            formState.protocol === p
+                          className={`px-6 py-2.5 rounded-full text-[9px] font-black tracking-widest uppercase border transition-all hover:cursor-pointer ${
+                            formState.service === p
                               ? "bg-indigo-500 border-indigo-500 text-white"
                               : "border-white/10 text-slate-500 hover:text-white hover:border-white/30"
                           }`}
@@ -217,25 +239,27 @@ const ContactPage = () => {
 
                   <div className="space-y-4">
                     <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">
-                      Transmission_Content
+                      Transmission_Payload (Project Details)
                     </label>
                     <textarea
                       required
                       rows={5}
-                      placeholder="AWAITING INPUT..."
+                      placeholder="DESCRIBE THE OPERATION..."
+                      value={formState.project_details}
                       className="w-full bg-white/5 border border-white/10 rounded-3xl px-8 py-5 text-white focus:outline-none focus:border-indigo-500/50 font-mono text-sm tracking-wider resize-none"
                       onChange={(e) =>
-                        setFormState({ ...formState, message: e.target.value })
+                        setFormState({ ...formState, project_details: e.target.value })
                       }
                     />
                   </div>
 
                   <button
+                    disabled={isTransmitting}
                     type="submit"
-                    className="w-full py-6 bg-white text-slate-950 text-[11px] font-black tracking-[0.3em] uppercase hover:bg-indigo-500 hover:text-white transition-all group relative overflow-hidden"
+                    className="w-full py-6 bg-white text-slate-950 text-[11px] font-black tracking-[0.3em] uppercase hover:bg-indigo-500 hover:text-white transition-all group relative overflow-hidden disabled:opacity-50 disabled:cursor-wait"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-4">
-                      Initialize Transmission
+                      {isTransmitting ? "DATA PACKETIZING..." : "Initialize Transmission"}
                       <svg
                         className="w-4 h-4 group-hover:translate-x-2 transition-transform"
                         fill="none"

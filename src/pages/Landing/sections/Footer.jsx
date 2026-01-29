@@ -13,15 +13,20 @@ import { Linkedin } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useSubscribeUpdateMutation } from "../../../../redux/features/apiSlice";
 
 const Footer = () => {
+  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
+  const [subscribeUpdate, { isLoading }] = useSubscribeUpdateMutation();
 
   const submit = async () => {
     if (!email) {
-      alert("type your email");
+      setError("Please enter your email address");
     } else {
+      const res = await subscribeUpdate({ email }).unwrap();
       setEmail("");
+      setError("");
     }
   };
   return (
@@ -130,17 +135,27 @@ const Footer = () => {
             Stay connected with innovation. Subscribe now for expert insights,
             latest releases, and agency-exclusive offers.
           </p>
-          <div className="flex bg-white/5 rounded-l-md border border-white/10 focus-within:border-blue-500 transition-colors">
+          <div
+            className={`flex bg-white/5 rounded-l-md  focus-within:border-blue-500 transition-colors ${error ? "border border-red-500" : "border border-white/10"}`}
+          >
+            {/* {alert(error)} */}
             <input
               type="email"
+              disabled={isLoading}
+              required
+              error={error}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError("");
+              }}
               placeholder="Enter your email"
               className="p-3 rounded-l-md text-white w-full bg-transparent focus:outline-none placeholder:text-gray-600"
             />
             <button
               onClick={() => submit()}
-              className="bg-blue-600 text-white px-4 rounded-r-md hover:bg-blue-500 transition-colors font-medium text-sm"
+              disabled={isLoading}
+              className="bg-blue-600 text-white px-4 rounded-r-md hover:bg-blue-500 transition-colors font-medium text-sm hover:cursor-pointer disabled:opacity-50 disabled:cursor-wait"
             >
               Subscribe
             </button>

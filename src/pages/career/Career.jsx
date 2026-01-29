@@ -1,189 +1,94 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import { useNavigate } from "react-router";
-
-gsap.registerPlugin(ScrollTrigger);
-
-export const JOB_POSTINGS = [
-  {
-    id: "j1",
-    title: "Senior AI Research Engineer",
-    department: "Intelligence Unit",
-    location: "Remote / London",
-    type: "Full-time",
-    description:
-      "Lead the development of our next-gen generative models. Requires deep expertise in transformer architectures and efficient fine-tuning.",
-    responsibilities: [
-      "Design and implement novel neural architectures for multi-modal LLMs.",
-      "Optimize model inference performance for edge and cloud deployments.",
-      "Publish research findings in top-tier AI conferences.",
-      "Mentor junior research engineers in advanced deep learning techniques.",
-    ],
-    requirements: [
-      "PhD or equivalent experience in Computer Science or Mathematics.",
-      "Proficiency in PyTorch or JAX.",
-      "Proven track record of publishing at NeurIPS, ICML, or CVPR.",
-      "Strong understanding of hardware-level optimization (CUDA, Triton).",
-    ],
-    benefits: [
-      "Unlimited research compute budget.",
-      "Annual travel stipend for global conferences.",
-      "Comprehensive health, dental, and vision insurance.",
-      "Equity ownership in JVAI Dynamics.",
-    ],
-  },
-  {
-    id: "j2",
-    title: "Creative Technologist (Three.js)",
-    department: "Digital Experiences",
-    location: "Remote / Berlin",
-    type: "Full-time",
-    description:
-      "Bridge the gap between design and high-performance WebGL. You will craft immersive spatial interfaces for global brands.",
-    responsibilities: [
-      "Develop interactive 3D environments using Three.js and React Three Fiber.",
-      "Author custom GLSL shaders for advanced visual effects.",
-      "Optimize rendering pipelines for mobile and desktop browsers.",
-      "Collaborate with UI/UX designers to push the boundaries of digital storytelling.",
-    ],
-    requirements: [
-      "Deep expertise in JavaScript/TypeScript and Three.js.",
-      "Strong understanding of linear algebra and computer graphics principles.",
-      "Experience with GSAP or similar animation libraries.",
-      "A portfolio showcasing unique, high-performance web experiences.",
-    ],
-    benefits: [
-      "High-end hardware setup of your choice.",
-      "Flexible working hours and remote-first culture.",
-      "Paid time off for personal creative projects.",
-      "Bi-annual team offsites in Europe.",
-    ],
-  },
-  {
-    id: "j3",
-    title: "DevOps Architect (K8s / AWS)",
-    department: "Infrastructure",
-    location: "Remote / NYC",
-    type: "Full-time",
-    description:
-      "Architect self-healing, scalable cloud systems that power our real-time AI engines. Security and low latency are your north stars.",
-    responsibilities: [
-      "Design and manage multi-region Kubernetes clusters on AWS.",
-      "Automate infrastructure provisioning using Terraform or Pulumi.",
-      "Implement robust CI/CD pipelines with GitHub Actions.",
-      "Lead incident response and disaster recovery planning.",
-    ],
-    requirements: [
-      "5+ years experience in SRE or Cloud Architecture roles.",
-      "Expert level knowledge of Docker, Kubernetes, and Helm.",
-      "Experience managing GPU-intensive workloads in production.",
-      "Strong background in networking security and IAM.",
-    ],
-    benefits: [
-      "Competitive salary and performance bonuses.",
-      "Home office stipend for ergonomic setups.",
-      "Mental health support and wellness programs.",
-      "Continuous learning budget for certifications.",
-    ],
-  },
-  {
-    id: "j4",
-    title: "Product Designer",
-    department: "Core Design",
-    location: "Remote",
-    type: "Contract / Full-time",
-    description:
-      "Design the future of human-AI collaboration. You create interfaces that make complex data feel intuitive.",
-    responsibilities: [
-      "Conduct user research to understand AI-driven workflows.",
-      "Create high-fidelity prototypes for web and spatial interfaces.",
-      "Maintain and expand our proprietary design system.",
-      "Work closely with engineers to ensure pixel-perfect implementation.",
-    ],
-    requirements: [
-      "Expert proficiency in Figma and prototyping tools.",
-      "Strong visual design sense and typography skills.",
-      "Experience designing complex dashboards or data-heavy apps.",
-      "Basic understanding of frontend development capabilities.",
-    ],
-    benefits: [
-      "Creative autonomy and ownership of projects.",
-      "Access to premium design tools and assets.",
-      "Collaborative environment with top-tier engineers.",
-      "Path to full-time employment for contractors.",
-    ],
-  },
-];
+import { useGetJobsQuery } from "../../../redux/features/apiSlice";
 
 const CareerPage = () => {
   const containerRef = useRef(null);
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const filters = [
-    "All",
-    "Engineering",
-    "Design",
-    "Infrastructure",
-    "Intelligence",
-  ];
+  const { data: jobsResponse, isLoading } = useGetJobsQuery();
+  const jobs = jobsResponse || [];
+
+  const filters = ["All", "AI","Frontend", "Design", "Sales", "CoffeeScript"];
   const navigate = useNavigate();
 
-  // Improved filtering logic
-  const filteredJobs =
-    activeFilter === "All"
-      ? JOB_POSTINGS
-      : JOB_POSTINGS.filter((job) => {
-          const query = activeFilter.toLowerCase();
-          return (
-            job.department.toLowerCase().includes(query) ||
-            job.title.toLowerCase().includes(query)
-          );
-        });
+  // Improved filtering logic for dynamic data
+  const filteredJobs = jobs.filter((job) => {
+    if (activeFilter === "All") return true;
+    const query = activeFilter.toLowerCase();
+    const tags = job.tags?.toLowerCase() || "";
+    const title = job.title?.toLowerCase() || "";
+    return tags.includes(query) || title.includes(query);
+  });
 
   useEffect(() => {
-    // Entrance animations
-    const tl = gsap.timeline();
-    tl.fromTo(
-      ".career-animate",
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: "power4.out" },
-    );
+    if (isLoading) return;
+
+    // Entrance animations - only if elements exist
+    if (document.querySelector(".career-animate")) {
+      const tl = gsap.timeline();
+      tl.fromTo(
+        ".career-animate",
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: "power4.out" },
+      );
+    }
 
     // Initial scroll trigger for the job section
-    ScrollTrigger.create({
-      trigger: ".job-section",
-      start: "top 75%",
-      onEnter: () => {
-        gsap.fromTo(
-          ".job-card",
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" },
-        );
-      },
-    });
+    if (document.querySelector(".job-section")) {
+      ScrollTrigger.create({
+        trigger: ".job-section",
+        start: "top 75%",
+        onEnter: () => {
+          if (document.querySelector(".job-card")) {
+            gsap.fromTo(
+              ".job-card",
+              { opacity: 0, x: -30 },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: "power2.out",
+              },
+            );
+          }
+        },
+      });
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
-  }, []);
+  }, [isLoading]);
 
-  // Animate job cards when filter changes
+  // Animate job cards when filter changes or loading finished
   useEffect(() => {
-    gsap.fromTo(
-      ".job-card",
-      { opacity: 0, scale: 0.98, y: 20 },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: 0.05,
-        ease: "back.out(1.4)",
-      },
+    if (!isLoading && document.querySelector(".job-card")) {
+      gsap.fromTo(
+        ".job-card",
+        { opacity: 0, scale: 0.98, y: 20 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.05,
+          ease: "back.out(1.4)",
+        },
+      );
+    }
+  }, [activeFilter, isLoading, filteredJobs.length]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
     );
-  }, [activeFilter]);
+  }
 
   return (
     <div ref={containerRef} className="">
@@ -296,7 +201,7 @@ const CareerPage = () => {
                 <button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
-                  className={`px-4 py-2 rounded-full border transition-all ${
+                  className={`px-4 py-2 rounded-full border transition-all hover:cursor-pointer ${
                     activeFilter === filter
                       ? "border-blue-500 bg-blue-500/10 text-white"
                       : "border-white/5 hover:border-white/20 hover:text-white"
@@ -321,27 +226,27 @@ const CareerPage = () => {
                     <div className="max-w-lg">
                       <div className="flex items-center gap-4 mb-4">
                         <span className="px-3 py-1 rounded-md bg-blue-500/10 text-[10px] font-black text-blue-400 uppercase tracking-widest">
-                          {job.department}
+                          {job.tags || "Engineering"}
                         </span>
                         <span className="text-slate-600 text-[10px] font-black uppercase tracking-widest">
                           {job.location}
                         </span>
                       </div>
-                      <h3 className="text-2xl md:text-3xl font-black text-white group-hover:text-blue-400 transition-colors mb-4">
+                      <h3 className="text-2xl md:text-3xl font-black text-white group-hover:text-blue-400 transition-colors mb-4 uppercase">
                         {job.title}
                       </h3>
-                      <p className="text-slate-500 leading-relaxed font-light">
-                        {job.description}
+                      <p className="text-slate-500 leading-relaxed font-light line-clamp-3">
+                        {job.intro}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-8">
                       <div className="hidden lg:block text-right">
                         <p className="text-slate-600 text-[10px] font-black uppercase tracking-widest mb-1">
-                          Status
+                          Protocol
                         </p>
                         <p className="text-white font-bold text-sm tracking-tight">
-                          {job.type}
+                          {job.work_schedule}
                         </p>
                       </div>
                       <button

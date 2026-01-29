@@ -25,9 +25,9 @@ const ChatMessage = ({ message }) => {
             : "bg-white/70 backdrop-blur-md text-gray-800 shadow-sm"
         }`}
       >
-        <p className="text-sm">
+        <div className="text-sm">
           <Markdown>{message.text}</Markdown>
-        </p>
+        </div>
         <p className="text-xs opacity-70 mt-1">
           {new Date(message.timestamp).toLocaleTimeString([], {
             hour: "2-digit",
