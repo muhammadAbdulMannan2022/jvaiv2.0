@@ -9,7 +9,7 @@ const Hero = () => {
     <section className="relative min-h-screen flex mt-12 overflow-hidden bg-[#050505]">
       {/* 3D Background Layer - Positioned to the left */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 right-[-10%] w-[120%] lg:w-[80%] h-full opacity-60">
+        <div className="absolute top-0 md:-top-20 right-[-10%] w-[120%] lg:w-[80%] h-full opacity-60">
           <Scene3D />
         </div>
       </div>

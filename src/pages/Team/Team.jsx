@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import VideoPlayer from "../../components/VideoPlayer";
+import CEO from "./CEO";
+import Chairman from "./Chairman";
 
 export const TEAM_MEMBERS = [
   {
@@ -227,24 +229,34 @@ const TeamPage = () => {
   return (
     <div className=" bg-[#020617]">
       {/* 1. Tactical Header */}
-      <header className="relative h-[80vh] flex flex-col justify-center px-6 border-b border-white/5 overflow-hidden">
-        <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="flex items-center gap-6 mb-8 dossier-reveal">
-            <div className="line-draw h-px w-20 bg-blue-500 origin-left" />
-            <span className="text-[10px] font-black text-blue-400 tracking-[0.5em] uppercase">
-              Human Capital Lattice
-            </span>
+      <header className="relative h-auto md:h-[80vh] flex flex-col md:flex-row items-center justify-center px-6 border-b border-white/5 overflow-hidden">
+        <div className="flex max-w-7xl items-center justify-between flex-col md:flex-row mt-10 md:mt-0">
+          <div className="mx-auto w-full relative z-10">
+            <div className="flex items-center gap-6 mb-8 dossier-reveal">
+              <div className="line-draw h-px w-20 bg-blue-500 origin-left" />
+              <span className="text-[10px] font-black text-blue-400 tracking-[0.5em] uppercase">
+                Human Capital Lattice
+              </span>
+            </div>
+            <h1 className="dossier-reveal text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.85] mb-12">
+              The Elite <br />
+              <span className="text-gradient">Collective.</span>
+            </h1>
+            <div className="max-w-xl dossier-reveal">
+              <p className="text-slate-500 text-lg md:text-xl font-light leading-relaxed">
+                JVAI Dynamics is not a traditional hierarchy. We are a
+                synchronized neural network of industry leaders, engineers, and
+                strategists.
+              </p>
+            </div>
           </div>
-          <h1 className="dossier-reveal text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.85] mb-12">
-            The Elite <br />
-            <span className="text-gradient">Collective.</span>
-          </h1>
-          <div className="max-w-xl dossier-reveal">
-            <p className="text-slate-500 text-lg md:text-xl font-light leading-relaxed">
-              JVAI Dynamics is not a traditional hierarchy. We are a
-              synchronized neural network of industry leaders, engineers, and
-              strategists.
-            </p>
+          <div className="w-full md:w-1/2">
+            <img
+              className="w-full"
+              // src="https://i.ibb.co.com/CKchggYr/gazi-bhai-removebg-preview.png"
+              src="https://res.cloudinary.com/dn98ksbcf/image/upload/v1777890276/Gazi_vai_k9nlal.png"
+              alt="hero"
+            />
           </div>
         </div>
 
@@ -268,6 +280,10 @@ const TeamPage = () => {
           </div>
         </div>
       </header>
+
+      {/* Global Leadership (Betopia Group) */}
+      <CEO />
+      <Chairman />
 
       {/* 2. Personnel Dossiers */}
       <div className="max-w-7xl mx-auto px-6 py-32 space-y-8">
