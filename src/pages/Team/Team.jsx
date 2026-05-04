@@ -11,7 +11,7 @@ export const TEAM_MEMBERS = [
     role: "General Manager",
     department: "GM",
     color: "#ffffff",
-    bio: "Gazi Alauddin is the master architect of the JVAI vision. She synchronizes all departmental nodes to ensure the company moves as a single high-performance entity.",
+    bio: "Gazi Alauddin is the master architect of the JVAI vision. He synchronizes all departmental nodes to ensure the company moves as a single high-performance entity.",
     image:
       "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777888088/Screenshot_2026-05-04_154745_rhnhap.png",
     connection: "Central Processing Hub: Directing all strategic vectors.",
@@ -21,7 +21,7 @@ export const TEAM_MEMBERS = [
 
   {
     id: "hto1",
-    name: "Istiaq Fahad",
+    name: "Istiaq Ahmmed Fahad",
     role: "Head of Technical Operation",
     department: "Operations",
     color: "#2dd4bf",
@@ -270,9 +270,6 @@ const TeamPage = () => {
               <p>
                 Synchronization: <span className="text-indigo-400">99.8%</span>
               </p>
-              <p>
-                Active Nodes: <span className="text-white">05</span>
-              </p>
             </div>
             <p className="hidden md:block">
               JVAI Dynamics // HQ: Virtual // Protocol: Alpha-7
@@ -287,6 +284,9 @@ const TeamPage = () => {
 
       {/* 2. Personnel Dossiers */}
       <div className="max-w-7xl mx-auto px-6 py-32 space-y-8">
+        <h1 className="text-center text-2xl md:text-4xl mb-10 font-bold uppercase">
+          Leadership
+        </h1>
         {/* Apex Node: GM */}
         <div className="space-y-4">
           <h2 className="text-[10px] font-black text-slate-600 tracking-[0.5em] uppercase px-4">
