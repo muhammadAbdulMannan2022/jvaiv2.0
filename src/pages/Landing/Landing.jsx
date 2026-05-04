@@ -5,6 +5,7 @@ import Services from "./sections/Services";
 import Testimonials from "./sections/Testimonials";
 import Experts from "./sections/Exparts";
 import PhotoGallery3D from "./sections/PhotoGallery";
+import Evolution from "./sections/Evolution";
 import FAQ from "./sections/FAQ";
 import SupportChat from "./Bot/SupportChat";
 
@@ -15,6 +16,7 @@ export default function Landing() {
       <TrustSection />
       <Services />
       <Experts />
+      <Evolution />
       <Testimonials />
       {/* <PhotoGallery3D /> */}
       <FAQ />

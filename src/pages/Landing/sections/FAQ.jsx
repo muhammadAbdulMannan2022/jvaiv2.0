@@ -60,9 +60,20 @@ const FAQ = () => {
 
   if (isLoading) {
     return (
-      <div className="py-20 flex items-center justify-center bg-[#050505]">
-        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
+      <section className="py-32 px-6 bg-[#050505]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-24 space-y-6">
+            <div className="h-3 w-40 bg-white/5 rounded-full mx-auto animate-pulse" />
+            <div className="h-16 w-2/3 bg-white/5 rounded-2xl mx-auto animate-pulse" />
+            <div className="h-6 w-1/2 bg-white/5 rounded-xl mx-auto animate-pulse" />
+          </div>
+          <div className="bg-white/2 border border-white/5 rounded-[3rem] p-8 md:p-16 space-y-8">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="h-20 w-full bg-white/5 rounded-2xl animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </section>
     );
   }
 

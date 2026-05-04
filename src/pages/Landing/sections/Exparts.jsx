@@ -33,9 +33,26 @@ const Experts = () => {
 
   if (isLoading) {
     return (
-      <div className="py-32 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
+      <section className="py-32 relative overflow-hidden">
+        <div className="px-6 md:px-12 max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
+          <div className="space-y-4">
+            <div className="h-2 w-32 bg-white/5 rounded-full animate-pulse" />
+            <div className="h-16 w-64 bg-white/5 rounded-2xl animate-pulse" />
+          </div>
+          <div className="space-y-4 flex flex-col items-end">
+            <div className="h-4 w-48 bg-white/5 rounded-full animate-pulse" />
+            <div className="flex gap-3">
+              <div className="w-12 h-12 rounded-full bg-white/5 animate-pulse" />
+              <div className="w-12 h-12 rounded-full bg-white/5 animate-pulse" />
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-8 px-6 md:px-12">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="w-[320px] md:w-95 h-[500px] bg-white/5 rounded-[40px] animate-pulse shrink-0" />
+          ))}
+        </div>
+      </section>
     );
   }
 

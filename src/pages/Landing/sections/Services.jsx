@@ -26,8 +26,20 @@ const App = ({ titleClass }) => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="relative min-h-screen bg-[#050505] text-white overflow-hidden">
+        <main className="relative z-10 pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+          <header className="mb-24 space-y-6">
+            <div className="h-3 w-40 bg-white/5 rounded-full animate-pulse" />
+            <div className="h-20 w-3/4 bg-white/5 rounded-3xl animate-pulse" />
+            <div className="h-20 w-1/2 bg-white/5 rounded-3xl animate-pulse" />
+            <div className="h-6 w-1/3 bg-white/5 rounded-xl animate-pulse mt-8" />
+          </header>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="aspect-[4/5] bg-white/5 rounded-2xl animate-pulse" />
+            ))}
+          </div>
+        </main>
       </div>
     );
   }

@@ -235,7 +235,7 @@ const TeamPage = () => {
               Human Capital Lattice
             </span>
           </div>
-          <h1 className="dossier-reveal text-6xl md:text-9xl font-black text-white tracking-tighter leading-[0.85] mb-12">
+          <h1 className="dossier-reveal text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.85] mb-12">
             The Elite <br />
             <span className="text-gradient">Collective.</span>
           </h1>

@@ -147,9 +147,15 @@ const Testimonials = () => {
 
   if (isLoading) {
     return (
-      <div className="h-[90vh] flex items-center justify-center bg-[#050505]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
+      <section className="h-[90vh] bg-[#050505] overflow-hidden">
+        <div className="pt-12 px-6 text-center space-y-4">
+          <div className="h-3 w-32 bg-white/5 rounded-full mx-auto animate-pulse" />
+          <div className="h-16 w-1/2 bg-white/5 rounded-2xl mx-auto animate-pulse" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <div className="w-112.5 h-105 bg-white/5 rounded-[48px] animate-pulse" />
+        </div>
+      </section>
     );
   }
 
