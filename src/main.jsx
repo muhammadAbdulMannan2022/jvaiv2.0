@@ -6,6 +6,10 @@ import { RouterProvider } from "react-router";
 import router from "./Router/Router.jsx";
 import { Provider } from "react-redux";
 import { store } from "../redux/store.js";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

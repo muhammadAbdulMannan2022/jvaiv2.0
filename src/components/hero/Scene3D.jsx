@@ -3,13 +3,10 @@ import { Canvas } from "@react-three/fiber";
 import { Environment, Float, OrbitControls } from "@react-three/drei";
 import GlassTorus from "./GlassEffect";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Scene3D = () => {
   const canvasRef = React.useRef(null);
-  gsap.registerPlugin(useGSAP);
-  gsap.registerPlugin(ScrollTrigger);
 
   return (
     <Canvas

@@ -18,6 +18,7 @@ export default function Navbar() {
         { path: "/about", text: "About Us" },
         { path: "/team", text: "Our Team" },
         { path: "/career", text: "Career" },
+        { path: "/life-at-jvai", text: "Life at JVAI" },
       ],
     },
     { name: "Work", path: "/work" },

@@ -13,6 +13,7 @@ import ContactPage from "../pages/Contact/ContactUs";
 import BlogPage from "../pages/Blog/BlogPage";
 import BlogEditor from "../pages/Blog/Editor";
 import BlogDetails from "../pages/Blog/BlogDetails";
+import LifeAtJVAI from "../pages/LifeAtJVAI/LifeAtJVAI";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
           {
             path: "blog/:id",
             element: <BlogDetails />,
+          },
+          {
+            path: "life-at-jvai",
+            element: <LifeAtJVAI />,
           },
         ],
       },

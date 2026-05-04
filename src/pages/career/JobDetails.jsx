@@ -148,7 +148,7 @@ const JobDetails = () => {
                   Required Credentials
                 </h2>
                 <div 
-                    className="job-detail-reveal text-slate-300 text-lg leading-relaxed font-light prose prose-invert max-w-none bg-white/[0.02] p-8 md:p-12 rounded-4xl border border-white/5"
+                    className="job-detail-reveal text-slate-300 text-lg leading-relaxed font-light prose prose-invert max-w-none bg-white/2 p-8 md:p-12 rounded-4xl border border-white/5"
                     dangerouslySetInnerHTML={{ __html: job.requirements }}
                 />
               </section>

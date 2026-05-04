@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router";
 import { useGetJobsQuery } from "../../../redux/features/apiSlice";
-
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 const CareerPage = () => {
   const containerRef = useRef(null);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -191,7 +190,7 @@ const CareerPage = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4">
-                Open <span className="text-gradient">Nodes.</span>
+                Open <span className="text-gradient">Positions.</span>
               </h2>
               <p className="text-slate-500 text-lg">
                 Select a specialized unit to begin.
