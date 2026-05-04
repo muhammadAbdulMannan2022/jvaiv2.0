@@ -7,13 +7,14 @@ const WorksHero3D = () => {
             The JVAI Story
           </span>
           <h1 className="about-hero-text text-5xl md:text-8xl font-black mb-10 tracking-tighter leading-none">
-            Architects of <br />
-            <span className="text-gradient">The Artificial.</span>
+            Proven Solutions <br />
+            <span className="text-gradient">for Global Leaders.</span>
           </h1>
           <p className="about-hero-text text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            We are a collective of rogue engineers, data scientists, and
-            creative thinkers dedicated to pushing the boundaries of what
-            software can achieve.
+            Explore our archive of digital transformation. From stealth-mode
+            startups to global industry leaders, we’ve delivered scalable
+            platforms that solve real-world problems through innovative
+            engineering.
           </p>
         </div>
       </div>

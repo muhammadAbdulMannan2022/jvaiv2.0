@@ -1,8 +1,10 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import Scene3D from "../../../components/hero/Scene3D";
+import { useNavigate } from "react-router";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#050505]">
       {/* 3D Background Layer - Positioned to the left */}
@@ -24,24 +26,35 @@ const Hero = () => {
           </div>
 
           <div>
-            <h1 className="text-6xl md:text-7xl lg:text-9xl font-black bg-linear-to-r from-white via-blue-100 to-blue-600 inline-block text-transparent bg-clip-text leading-[0.95] tracking-tighter pb-14">
-              Build better <br />
-              together.
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black bg-linear-to-r from-white via-blue-100 to-blue-600 inline-block text-transparent bg-clip-text leading-[0.95] tracking-tighter pb-14">
+              Engineering the Future of
+              <br /> Intelligent Digital Experiences.
             </h1>
           </div>
 
-          <p className="text-xl text-slate-400 max-w-lg mb-12 leading-relaxed font-medium">
-            A high-performance workspace for modern teams. Orchestrate projects,
-            sync with your team, and ship faster than ever.
+          <p className="text-lg md:text-xl text-slate-400 max-w-lg mb-12 leading-relaxed font-medium">
+            At JVAI, we bridge the gap between complex AI technology and
+            intuitive user experiences. We empower modern teams to build, scale,
+            and innovate faster with high-performance digital solutions.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-5">
-            <button className="group px-10 py-5 bg-blue-600 text-white text-lg font-bold rounded-2xl hover:bg-blue-500 transition-all shadow-2xl shadow-blue-900/20 flex items-center justify-center gap-2 pointer-events-auto">
-              Get Started Free
+            <button
+              onClick={() => {
+                navigate("/contact");
+              }}
+              className="group hover:cursor-pointer px-10 py-5 bg-blue-600 text-white text-lg font-bold rounded-2xl hover:bg-blue-500 transition-all shadow-2xl shadow-blue-900/20 flex items-center justify-center gap-2 pointer-events-auto"
+            >
+              Start Your Project
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="px-10 py-5 bg-white/5 backdrop-blur-md border border-white/10 text-white text-lg font-bold rounded-2xl hover:bg-white/10 transition-all pointer-events-auto">
-              Book a Demo
+            <button
+              onClick={() => {
+                navigate("/services");
+              }}
+              className="px-10 py-5 bg-white/5 backdrop-blur-md border border-white/10 text-white text-lg font-bold rounded-2xl hover:bg-white/10 transition-all pointer-events-auto"
+            >
+              Explore Our Solutions
             </button>
           </div>
 

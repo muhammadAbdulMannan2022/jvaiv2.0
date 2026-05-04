@@ -11,7 +11,7 @@ const CareerPage = () => {
   const { data: jobsResponse, isLoading } = useGetJobsQuery();
   const jobs = jobsResponse || [];
 
-  const filters = ["All", "AI","Frontend", "Design", "Sales", "CoffeeScript"];
+  const filters = ["All", "AI", "Frontend", "Design", "Sales", "CoffeeScript"];
   const navigate = useNavigate();
 
   // Improved filtering logic for dynamic data
@@ -104,12 +104,15 @@ const CareerPage = () => {
 
             {/* Heading */}
             <h1 className="career-animate text-4xl md:text-6xl lg:text-7xl  font-black mb-8 tracking-tighter leading-none text-white text-gradient">
-              Architect the Silicon Future.
+              Build the Future with JVAI.
             </h1>
 
             <p className="career-animate text-base sm:text-lg md:text-xl lg:text-lg xl:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed mb-10">
-              JVAI is an engineering collective designed for those who find
-              comfort in complexity.
+              We are a multi-disciplinary collective of engineers, designers,
+              and dreamers. If you are passionate about pushing the boundaries
+              of AI and creative technology, we want to hear from you. Join a
+              team where your work directly impacts the trajectory of global
+              brands.
             </p>
 
             {/* CTA */}

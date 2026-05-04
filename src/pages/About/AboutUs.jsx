@@ -64,14 +64,17 @@ const AboutPage = () => {
             <span className="about-hero-text inline-block px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold tracking-widest uppercase mb-8">
               The JVAI Story
             </span>
-            <h1 className="about-hero-text text-5xl md:text-8xl font-black mb-10 tracking-tighter leading-none">
-              Architects of <br />
-              <span className="text-gradient">The Artificial.</span>
+            <h1 className="about-hero-text text-5xl md:text-7xl font-black mb-10 tracking-tighter leading-none">
+              Where Strategic AI Meets
+              <br />
+              <span className="text-gradient">World-Class Design.</span>
             </h1>
-            <p className="about-hero-text text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              We are a collective of rogue engineers, data scientists, and
-              creative thinkers dedicated to pushing the boundaries of what
-              software can achieve.
+            <p className="about-hero-text text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+              ategic AI Meets World-Class Design. Mission Statement: Our mission
+              is to transform businesses through intelligent engineering. We
+              don’t just build software; we create competitive advantages by
+              integrating Generative AI and cutting-edge architecture into every
+              project.
             </p>
           </div>
         </div>
@@ -93,13 +96,25 @@ const AboutPage = () => {
               <div className="flex gap-4">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shadow-[0_0_10px_#6366f1]" />
                 <p className="text-slate-300 font-medium italic">
-                  "Software should be as intuitive as a reflex."
+                  <span className="font-bold">AI-First Approach:</span> We
+                  integrate intelligence at the core of your product, not as an
+                  afterthought.
                 </p>
               </div>
               <div className="flex gap-4">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shadow-[0_0_10px_#6366f1]" />
                 <p className="text-slate-300 font-medium italic">
-                  "Complexity is a bug, simplicity is the ultimate feature."
+                  <span className="font-bold">Boutique Precision:</span> We
+                  maintain a lean, high-talent team to ensure every client
+                  receives senior-level expertise.
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shadow-[0_0_10px_#6366f1]" />
+                <p className="text-slate-300 font-medium italic">
+                  <span className="font-bold">Scalable Architecture:</span> Our
+                  solutions are built to handle the demands of tomorrow, from
+                  high-traffic web apps to complex neural networks.
                 </p>
               </div>
             </div>

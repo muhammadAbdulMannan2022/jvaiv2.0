@@ -46,8 +46,8 @@ const Footer = () => {
             />
           </div>
           <p className="text-center md:text-left max-w-xs text-gray-400">
-            At JVAI, we deliver cutting-edge solutions that are fast, flexible,
-            and designed for success.
+            Delivering cutting-edge solutions that are fast, flexible, and
+            designed for global success.
           </p>
         </div>
 
@@ -132,8 +132,8 @@ const Footer = () => {
         <div className="text-gray-400 w-full md:w-1/5">
           <h3 className="text-lg font-semibold mb-4 text-white">Newsletter</h3>
           <p className="mb-4 text-sm">
-            Stay connected with innovation. Subscribe now for expert insights,
-            latest releases, and agency-exclusive offers.
+            Stay Connected with Innovation. Subscribe for expert insights on AI
+            trends, latest releases, and agency-exclusive offers.
           </p>
           <div
             className={`flex bg-white/5 rounded-l-md  focus-within:border-blue-500 transition-colors ${error ? "border border-red-500" : "border border-white/10"}`}
