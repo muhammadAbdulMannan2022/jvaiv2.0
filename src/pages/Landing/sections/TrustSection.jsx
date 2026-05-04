@@ -31,6 +31,8 @@ const logos1 = [
   "/logo/10.png",
   "/logo/11.png",
   "/logo/12.png",
+  "/logo/13.png",
+  "/logo/14.png",
 ];
 
 const LogoMarquee = ({ direction = "left", items = [] }) => {

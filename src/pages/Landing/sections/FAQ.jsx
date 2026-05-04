@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle, Sparkles } from "lucide-react";
 import { useGetFaQQuery } from "../../../../redux/features/apiSlice";
+import { Link } from "react-router";
 
 const FAQItem = ({ faq, isOpen, toggle }) => {
   return (
@@ -11,12 +12,16 @@ const FAQItem = ({ faq, isOpen, toggle }) => {
         className="w-full py-8 flex items-start justify-between gap-6 text-left group hover:cursor-pointer"
       >
         <div className="flex gap-6">
-            <div className={`mt-1 transition-colors duration-500 ${isOpen ? "text-blue-500" : "text-white/20 group-hover:text-white/40"}`}>
-                <HelpCircle size={22} />
-            </div>
-            <h3 className={`text-xl md:text-2xl font-bold transition-all duration-500 tracking-tight ${isOpen ? "text-white" : "text-white/60 group-hover:text-white/80"}`}>
-                {faq.question}
-            </h3>
+          <div
+            className={`mt-1 transition-colors duration-500 ${isOpen ? "text-blue-500" : "text-white/20 group-hover:text-white/40"}`}
+          >
+            <HelpCircle size={22} />
+          </div>
+          <h3
+            className={`text-xl md:text-2xl font-bold transition-all duration-500 tracking-tight ${isOpen ? "text-white" : "text-white/60 group-hover:text-white/80"}`}
+          >
+            {faq.question}
+          </h3>
         </div>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
@@ -55,43 +60,45 @@ const FAQ = () => {
 
   if (isLoading) {
     return (
-        <div className="py-20 flex items-center justify-center bg-[#050505]">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
-        </div>
+      <div className="py-20 flex items-center justify-center bg-[#050505]">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
     );
   }
 
-  if (isError) return (
-    <div className="py-10 text-center text-white/20 uppercase tracking-widest text-[10px]">
+  if (isError)
+    return (
+      <div className="py-10 text-center text-white/20 uppercase tracking-widest text-[10px]">
         Failed to initialize knowledge base node.
-    </div>
-  );
-  
-  if (!faqs || faqs.length === 0) return (
-    <div className="py-10 text-center text-white/20 uppercase tracking-widest text-[10px]">
+      </div>
+    );
+
+  if (!faqs || faqs.length === 0)
+    return (
+      <div className="py-10 text-center text-white/20 uppercase tracking-widest text-[10px]">
         Knowledge base archive is currently empty.
-    </div>
-  );
+      </div>
+    );
 
   return (
     <section className="py-32 px-6 bg-[#050505] relative overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
-        
+      {/* Background Decorative Elements */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-24">
-            <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex items-center justify-center gap-3 mb-6"
-            >
-                <Sparkles size={16} className="text-blue-500" />
-                <span className="text-blue-500 uppercase tracking-[0.6em] font-black text-[10px]">
-                    Knowledge Base
-                </span>
-            </motion.div>
-          <motion.h2 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center justify-center gap-3 mb-6"
+          >
+            <Sparkles size={16} className="text-blue-500" />
+            <span className="text-blue-500 uppercase tracking-[0.6em] font-black text-[10px]">
+              Insights & Architecture
+            </span>
+          </motion.div>
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -99,25 +106,28 @@ const FAQ = () => {
             className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8"
           >
             Frequently Asked <br />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-indigo-400">Questions.</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-indigo-400">
+              Questions.
+            </span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="text-white/40 text-lg md:text-xl font-light max-w-2xl mx-auto"
           >
-            Everything you need to know about our technology, process, and partnership model.
+            Everything you need to know about our technology, process, and
+            partnership model.
           </motion.p>
         </div>
 
-        <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="bg-white/[0.02] border border-white/5 rounded-[3rem] p-8 md:p-16 backdrop-blur-3xl"
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="bg-white/2 border border-white/5 rounded-[3rem] p-8 md:p-16 backdrop-blur-3xl"
         >
           {faqs.map((faq) => (
             <FAQItem
@@ -130,23 +140,31 @@ const FAQ = () => {
         </motion.div>
 
         {/* Bottom CTA */}
-        <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="mt-20 text-center"
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-20 text-center"
         >
-            <p className="text-white/30 text-sm font-medium uppercase tracking-widest mb-6">Still have architectural questions?</p>
-            <a 
-                href="/contact"
-                className="inline-flex items-center gap-4 px-10 py-5 bg-white text-black rounded-full font-black text-xs uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105 active:scale-95 hover:cursor-pointer"
+          <p className="text-white/30 text-sm font-medium uppercase tracking-widest mb-6">
+            Still have architectural questions?
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-4 px-10 py-5 bg-white text-black rounded-full font-black text-xs uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105 active:scale-95 hover:cursor-pointer"
+          >
+            Contact Our Engineers
+            <svg
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
             >
-                Contact Our Engineers
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-            </a>
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
         </motion.div>
       </div>
     </section>

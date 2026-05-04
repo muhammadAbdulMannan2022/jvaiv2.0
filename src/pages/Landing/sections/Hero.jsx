@@ -16,7 +16,7 @@ const Hero = () => {
 
       {/* Content Layer */}
       <div className="max-w-screen-2xl mx-auto w-full relative z-10 px-6 py-4 md:px-8 lg:px-12">
-        <div className="max-w-5xl">
+        <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 backdrop-blur-sm text-blue-400 text-sm font-semibold mb-8 border border-blue-500/20">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>

@@ -5,74 +5,71 @@ import VideoPlayer from "../../components/VideoPlayer";
 export const TEAM_MEMBERS = [
   {
     id: "gm-1",
-    name: "Sarah Jenkins",
+    name: "Gazi Alauddin",
     role: "General Manager",
     department: "GM",
     color: "#ffffff",
-    bio: "Sarah is the master architect of the JVAI vision. She synchronizes all departmental nodes to ensure the company moves as a single high-performance entity.",
+    bio: "Gazi Alauddin is the master architect of the JVAI vision. She synchronizes all departmental nodes to ensure the company moves as a single high-performance entity.",
     image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777888088/Screenshot_2026-05-04_154745_rhnhap.png",
     connection: "Central Processing Hub: Directing all strategic vectors.",
     videoUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "https://res.cloudinary.com/dn98ksbcf/video/upload/v1777887904/Gazi_via_vzw0uh.mp4",
   },
+
   {
-    id: "t1",
-    name: "Elena Vance",
-    role: "Head of Global Sales",
-    department: "Sales",
+    id: "hto1",
+    name: "Istiaq Fahad",
+    role: "Head of Technical Operation",
+    department: "Operations",
     color: "#2dd4bf",
-    bio: "Elena translates complex business requirements into high-velocity digital strategies, ensuring every client partnership is calibrated for maximum ROI.",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=688&auto=format&fit=crop",
+    bio: "Fahad oversees the structural integrity of our cloud lattice. He ensures our infrastructure is self-healing, scalable, and secure.",
+    image: "https://i.ibb.co/C5szG7LV/f93c81c1ce82.png",
     connection:
       "Feeds Operations with precise client data and market-ready objectives.",
     videoUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  },
-  {
-    id: "hto-1",
-    name: "Marcus Thorne",
-    role: "Head of Technical Operation (Infrastructure)",
-    department: "Operations",
-    color: "#6366f1",
-    bio: "Marcus oversees the structural integrity of our cloud lattice. He ensures our infrastructure is self-healing, scalable, and secure.",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=687&auto=format&fit=crop",
-    connection: "Primary Processor: Managing high-density system architecture.",
-    videoUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "https://res.cloudinary.com/dn98ksbcf/video/upload/v1757576899/FAHAD_INTRO_qg9x7a.mp4",
   },
   {
     id: "hto-2",
-    name: "Julian Reed",
-    role: "Head of Technical Operation (AI Labs)",
+    name: "PALASH CHANDRA BARMAN",
+    role: "Head of Technical Operation",
     department: "Operations",
     color: "#818cf8",
-    bio: "Julian leads the implementation of our neural models. He bridges the gap between pure research and production-grade AI delivery.",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=687&auto=format&fit=crop",
+    bio: "Palash leads the implementation of our neural models. He bridges the gap between pure research and production-grade AI delivery.",
+    image: "https://i.ibb.co/SLWb1fn/931dd9a7cffd.png",
     connection:
       "Parallel Processor: Driving intelligence output across all nodes.",
     videoUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "https://res.cloudinary.com/dn98ksbcf/video/upload/v1757576884/Palash_cydcxi.mp4",
+  },
+  {
+    id: "t1",
+    name: "Mushfiqur rahman",
+    role: "AGM",
+    department: "Sales",
+    color: "#2dd4bf",
+    bio: "Mushfiq translates complex business requirements into high-velocity digital strategies, ensuring every client partnership is calibrated for maximum ROI.",
+    image: "https://i.ibb.co/JWGd0z6x/54bf80ffb07f.png",
+    connection:
+      "Feeds Operations with precise client data and market-ready objectives.",
+    videoUrl:
+      "https://res.cloudinary.com/dn98ksbcf/video/upload/v1757576897/Sales_agm-_yj3dfv.mp4",
   },
   {
     id: "t3",
-    name: "Saira Kahn",
-    role: "VP of Business Development",
+    name: "Sheabuddin Tushar ",
+    role: "Head of Business Development",
     department: "BizDev",
     color: "#a855f7",
-    bio: "The vision strategist. Saira identifies emerging sectors and forges high-level alliances to expand the JVAI ecosystem.",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop",
+    bio: "The vision strategist. Tushar identifies emerging sectors and forges high-level alliances to expand the JVAI ecosystem.",
+    image: "https://i.ibb.co/zTnX1SYk/106921c6a888.png",
     connection: "Expansion Module: Forging external strategic synapses.",
     videoUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "https://res.cloudinary.com/dn98ksbcf/video/upload/v1757576890/Tushar_bhai_hgpvjq.mp4",
   },
 ];
 const TeamPage = () => {
-  const [hoveredDept, setHoveredDept] = useState(null);
   const [selectedInterview, setSelectedInterview] = useState(null);
 
   useEffect(() => {
@@ -238,7 +235,7 @@ const TeamPage = () => {
               Human Capital Lattice
             </span>
           </div>
-          <h1 className="dossier-reveal text-6xl md:text-[10rem] font-black text-white tracking-tighter leading-[0.85] mb-12">
+          <h1 className="dossier-reveal text-6xl md:text-9xl font-black text-white tracking-tighter leading-[0.85] mb-12">
             The Elite <br />
             <span className="text-gradient">Collective.</span>
           </h1>
@@ -284,14 +281,6 @@ const TeamPage = () => {
 
         {/* Support Nodes */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Sales */}
-          <div className="space-y-4 lg:col-span-1">
-            <h2 className="text-[10px] font-black text-slate-600 tracking-[0.5em] uppercase px-4">
-              Market_Resonance
-            </h2>
-            {salesMember && <MemberDossier member={salesMember} />}
-          </div>
-
           {/* Operations (Parallel HTOs) */}
           <div className="space-y-4 lg:col-span-2">
             <h2 className="text-[10px] font-black text-slate-600 tracking-[0.5em] uppercase px-4">
@@ -302,6 +291,13 @@ const TeamPage = () => {
                 <MemberDossier key={m.id} member={m} />
               ))}
             </div>
+          </div>
+          {/* Sales */}
+          <div className="space-y-4 lg:col-span-1">
+            <h2 className="text-[10px] font-black text-slate-600 tracking-[0.5em] uppercase px-4">
+              Market_Resonance
+            </h2>
+            {salesMember && <MemberDossier member={salesMember} />}
           </div>
 
           {/* BizDev */}
@@ -406,6 +402,7 @@ const TeamPage = () => {
             <div className="grow relative">
               <VideoPlayer
                 url={selectedInterview.videoUrl || ""}
+                isRunning={true}
                 className="w-full h-full rounded-none border-0"
               />
 

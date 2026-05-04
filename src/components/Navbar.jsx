@@ -16,8 +16,8 @@ export default function Navbar() {
       path: "/company",
       child: [
         { path: "/about", text: "About Us" },
-        { path: "/career", text: "Career" },
         { path: "/team", text: "Our Team" },
+        { path: "/career", text: "Career" },
       ],
     },
     { name: "Work", path: "/work" },

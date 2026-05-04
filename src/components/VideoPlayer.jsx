@@ -1,8 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 
-const VideoPlayer = ({ url, poster, className = "", controls = false }) => {
+const VideoPlayer = ({
+  url,
+  poster,
+  className = "",
+  controls = false,
+  isRunning = false,
+}) => {
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(isRunning);
   const [progress, setProgress] = useState(0);
 
   const togglePlay = () => {
@@ -39,31 +45,34 @@ const VideoPlayer = ({ url, poster, className = "", controls = false }) => {
         loop
         playsInline
         controls={controls}
+        autoPlay={isRunning}
       />
 
       {/* Overlay UI */}
-      {!controls && <div
-        className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-500 ${isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}
-      >
-        <button
-          onClick={togglePlay}
-          className="w-20 h-20 flex hover:cursor-pointer items-center justify-center rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white hover:scale-110 transition-transform shadow-2xl"
+      {!controls && (
+        <div
+          className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-500 ${isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}
         >
-          {isPlaying ? (
-            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-            </svg>
-          ) : (
-            <svg
-              className="w-8 h-8 ml-1"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          )}
-        </button>
-      </div>}
+          <button
+            onClick={togglePlay}
+            className="w-20 h-20 flex hover:cursor-pointer items-center justify-center rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white hover:scale-110 transition-transform shadow-2xl"
+          >
+            {isPlaying ? (
+              <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            ) : (
+              <svg
+                className="w-8 h-8 ml-1"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
+          </button>
+        </div>
+      )}
 
       {/* Progress Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10">

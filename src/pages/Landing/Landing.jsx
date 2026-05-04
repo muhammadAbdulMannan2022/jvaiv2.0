@@ -16,7 +16,7 @@ export default function Landing() {
       <Services />
       <Experts />
       <Testimonials />
-      <PhotoGallery3D />
+      {/* <PhotoGallery3D /> */}
       <FAQ />
     </div>
   );

@@ -55,7 +55,7 @@ const ServiceCard = ({ service, index, onSelect }) => {
         )}
 
         {/* Overlays */}
-        <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-transparent to-transparent opacity-90 md:opacity-80 group-hover:opacity-60 transition-opacity" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#000000] via-[#000000c9] to-transparent opacity-90 md:opacity-80 group-hover:opacity-60 transition-opacity" />
         <div className="absolute inset-0 bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
