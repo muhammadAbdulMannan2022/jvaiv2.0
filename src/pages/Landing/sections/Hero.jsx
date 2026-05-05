@@ -77,7 +77,7 @@ const Hero = () => {
             </div>
             <div className="text-sm font-semibold text-slate-400">
               <span className="text-white font-bold block">
-                12,000+ Happy Clients
+                1200+ Happy Clients
               </span>
               Trust JVAI for there projects.
             </div>

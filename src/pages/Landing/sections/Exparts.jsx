@@ -1,5 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  animate,
+} from "framer-motion";
 
 import {
   Cpu,
@@ -10,26 +17,60 @@ import {
   ChevronRight,
   MoveHorizontal,
 } from "lucide-react";
-import { useGetExpertsQuery, baseUri } from "../../../../redux/features/apiSlice";
+import {
+  useGetExpertsQuery,
+  baseUri,
+} from "../../../../redux/features/apiSlice";
 
 const Experts = () => {
+  const x = useMotionValue(0); // Track the X position
+  const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef(null);
   const sliderRef = useRef(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
-  
+
   const { data, isLoading } = useGetExpertsQuery();
   const experts = data?.Data || [];
 
+  const expertsToRender = [...experts, ...experts];
+
   useEffect(() => {
-    if (sliderRef.current && containerRef.current && experts.length > 0) {
+    if (experts.length === 0) return;
+
+    let controls;
+    if (sliderRef.current && containerRef.current) {
       const sliderWidth = sliderRef.current.scrollWidth;
-      const containerWidth = containerRef.current.offsetWidth;
+      const singleSetWidth = sliderWidth / 2;
+      
       setDragConstraints({
-        left: -(sliderWidth - containerWidth + 48),
+        left: -singleSetWidth,
         right: 0,
       });
+
+      if (!isPaused) {
+        const currentX = x.get();
+        // Speed in pixels per second
+        const speed = 50; 
+        
+        // Ensure we are within the range [ -singleSetWidth, 0 ]
+        if (currentX <= -singleSetWidth) x.set(currentX + singleSetWidth);
+        if (currentX > 0) x.set(currentX - singleSetWidth);
+
+        const remainingDistance = Math.abs(x.get() - (-singleSetWidth));
+        const duration = remainingDistance / speed;
+
+        controls = animate(x, -singleSetWidth, {
+          duration: duration,
+          ease: "linear",
+          onComplete: () => {
+            x.set(0);
+            setIsPaused(false); 
+          }
+        });
+      }
     }
-  }, [experts]);
+    return () => controls?.stop();
+  }, [isPaused, experts.length, x]);
 
   if (isLoading) {
     return (
@@ -49,7 +90,10 @@ const Experts = () => {
         </div>
         <div className="flex gap-8 px-6 md:px-12">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="w-[320px] md:w-95 h-[500px] bg-white/5 rounded-[40px] animate-pulse shrink-0" />
+            <div
+              key={i}
+              className="w-[320px] md:w-95 h-[500px] bg-white/5 rounded-[40px] animate-pulse shrink-0"
+            />
           ))}
         </div>
       </section>
@@ -122,52 +166,80 @@ const Experts = () => {
         <div className="w-10 md:w-36 bg-red-500 absolute top-0 left-0"></div>
         <motion.div
           ref={sliderRef}
+          style={{ x, width: "max-content" }} // Bind the motion value here
           drag="x"
           dragConstraints={dragConstraints}
           dragElastic={0.1}
-          dragMomentum={true}
-          className="flex gap-8 px-6 md:px-12 pb-12"
-          style={{ width: "max-content" }}
+          onDragStart={() => setIsPaused(true)} // Pause when dragging starts
+          onHoverStart={() => setIsPaused(true)} // Pause on mouse hover
+          onHoverEnd={() => setIsPaused(false)} // Resume on mouse leave
+          className="flex gap-8 px-6 md:px-12 pb-12 will-change-transform"
         >
-          {experts.map((expert, idx) => {
+          {expertsToRender.map((expert, idx) => {
             const imageUrl = expert.expert_picture?.startsWith("http")
               ? expert.expert_picture
               : `${baseUri}${expert.expert_picture}`;
-            
+
             // Dynamic specialties based on designation (Stable/Deterministic)
-            const getExpertSpecialties = (designation, expertId) => {
-              const d = designation?.toLowerCase() || "";
-              const frontendPool = ["React.js",  "Framer Motion","Three.js","Next.js", "WASM",  "Tailwind CSS"];
-              const backendPool = ["Django", "Go Lang", "System Design", "Rust", "PostgreSQL", "Cloud Arch"];
-              const designPool = ["UI/UX", "Visual ID", "Motion Design", "3D Art", "Product Design", "Art Direction"];
-              const aiPool = ["PyTorch", "NLP", "LLM Ops", "Generative AI", "Neural Nets", "Computer Vision"];
+            const getExpertSpecialties = (designation, expertId, name) => {
+                const d = designation?.toLowerCase() || "";
+                const n = name?.toLowerCase() || "";
+                
+                // Skill Pools - Lead with the "Main" thing in each array
+                const frontendPool = ["Next.js", "React.js", "Tailwind CSS", "Framer Motion", "Three.js", "WASM"];
+                const backendPool = ["Django", "Node.js","Go Lang" ,"PostgreSQL",  "System Design", "Rust", "Cloud Arch"];
+                const designPool = ["UI/UX", "Product Design", "Visual ID", "Motion Design", "3D Art", "Art Direction"];
+                const aiPool = ["Generative AI", "LLM Ops", "PyTorch", "NLP", "Neural Nets", "Computer Vision"];
+                const appdeb= ["Flutter","Dart"]
 
-              let pool = [];
-              if (d.includes("ai") || d.includes("ml")) pool = aiPool;
-              else if (d.includes("front")) pool = frontendPool;
-              else if (d.includes("back") || d.includes("engineer")) pool = backendPool;
-              else if (d.includes("design")) pool = designPool;
-              else pool = [...frontendPool, ...backendPool];
+                let pool = [];
+                let isMannan = n.includes("mannan") && (d.includes("full stack") || d.includes("fullstack"));
 
-              // Deterministic selection based on ID to avoid flickering
-              const index1 = (expertId * 7) % pool.length;
-              const index2 = (expertId * 13) % pool.length;
-              const finalTags = [pool[index1]];
-              if (index1 !== index2) finalTags.push(pool[index2]);
-              else finalTags.push(pool[(index1 + 1) % pool.length]);
-              
-              return finalTags;
-            };
-            
-            const specialties = getExpertSpecialties(expert.expert_designation, expert.id);
+                // 1. Specific override for you
+                if (isMannan) {
+                  pool = ["React Native", "Next.js", "React.js", "PostgreSQL","Node.js",];
+                } 
+                else if (/\b(ai|ml|data|science|scientist)\b/.test(d)) pool = aiPool;
+                else if (/\b(design|ui|ux|art|creative)\b/.test(d)) pool = designPool;
+                else if (d.includes("front")) pool = frontendPool;
+                else if (d.includes("back")) pool = backendPool;
+                else if (d.includes("app")) pool = appdeb;
+                else if (d.includes("full stack") || d.includes("fullstack")) {
+                  pool = ["Next.js", "Node.js", "React.js", "PostgreSQL", "System Design"];
+                } 
+                else {
+                  pool = [...frontendPool, ...backendPool];
+                }
+
+                // --- Selection Logic ---
+                
+                // Tag 1: Always the "Main Thing" (First item in pool)
+                const finalTags = [pool[0]];
+
+                // Tag 2: Deterministic secondary skill
+                const index2 = (expertId * 13) % (pool.length - 1) + 1;
+                finalTags.push(pool[index2]);
+
+                // Tag 3: Only for Mannan
+                if (isMannan) {
+                  let index3 = (expertId * 17) % (pool.length - 1) + 1;
+                  // Ensure Tag 3 isn't the same as Tag 2
+                  if (index3 === index2) index3 = (index3 % (pool.length - 1)) + 1;
+                  finalTags.push(pool[index3]);
+                }
+
+                return finalTags;
+              };
+
+            const specialties = getExpertSpecialties(
+              expert.expert_designation,
+              expert.id,
+              expert.expert_name 
+            );
 
             return (
-              <motion.div
-                key={expert.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.05, duration: 0.6 }}
-                viewport={{ once: true }}
+              <div
+                key={`${expert.id}-${idx}`}
                 className="group relative w-[320px] md:w-95 bg-[#0a0a0a] rounded-[40px] overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-500 shrink-0"
               >
                 {/* Image Container */}
@@ -214,13 +286,16 @@ const Experts = () => {
                       size={18}
                       className="hover:text-blue-400 cursor-help"
                     />
-                    <Cpu size={18} className="hover:text-blue-400 cursor-help" />
+                    <Cpu
+                      size={18}
+                      className="hover:text-blue-400 cursor-help"
+                    />
                   </div>
 
                   {/* Cyberpunk Scanline Effect */}
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-blue-500/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </motion.div>

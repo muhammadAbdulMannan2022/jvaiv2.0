@@ -5,10 +5,12 @@ import Scene from "../../../components/services/Sceane";
 import ServiceCard from "../../../components/services/ServiceCard";
 import VideoPlayer from "../../../components/VideoPlayer";
 import { useGetAllCategoriesQuery } from "../../../../redux/features/apiSlice";
+import { useNavigate } from "react-router";
 
 const App = ({ titleClass }) => {
   const [selectedService, setSelectedService] = useState(null);
   const { data: categoriesData, isLoading } = useGetAllCategoriesQuery();
+  const navigation = useNavigate()
 
   // Handle body scroll lock
   useEffect(() => {
@@ -236,7 +238,8 @@ const App = ({ titleClass }) => {
                 )}
 
                 <div className="mt-12 pt-8 border-t border-white/5">
-                  <button className="w-full bg-blue-600 text-white py-4 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm hover:bg-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all transform hover:-translate-y-1">
+                  <button onClick={()=>{navigation("/contact")
+                  }} className="w-full hover:cursor-pointer bg-blue-600 text-white py-4 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm hover:bg-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all transform hover:-translate-y-1">
                     Inquire for Project
                   </button>
                 </div>

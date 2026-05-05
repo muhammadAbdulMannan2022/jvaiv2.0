@@ -42,9 +42,9 @@ export default function App() {
   }, [path]);
   return (
     <div className={`relative ${isLoading ? "h-screen overflow-hidden" : ""}`}>
-      {/* <div className="absolute top-0 left-0 right-0 z-999999999999999999">
+      <div className="absolute top-0 left-0 right-0 z-999999999999999999">
         {isLoading && <LoadingScreen />}
-      </div> */}
+      </div>
       <div
         className={`${isLoading ? "opacity-0" : "opacity-100"} transition-all duration-500`}
       >

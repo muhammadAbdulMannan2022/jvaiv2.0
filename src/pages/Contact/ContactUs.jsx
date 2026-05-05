@@ -218,7 +218,7 @@ const ContactPage = () => {
                       Select_Operational_Protocol
                     </label>
                     <div className="flex flex-wrap gap-3">
-                      {["AI Solutions", "UI/UX Design", "Web Engineering", "Venture Strategy"].map((p) => (
+                      {["AI Solutions", "UI/UX Design", "Web Engineering", "Apps Development", "Others"].map((p) => (
                         <button
                           key={p}
                           type="button"
@@ -256,7 +256,7 @@ const ContactPage = () => {
                   <button
                     disabled={isTransmitting}
                     type="submit"
-                    className="w-full py-6 bg-white text-slate-950 text-[11px] font-black tracking-[0.3em] uppercase hover:bg-indigo-500 hover:text-white transition-all group relative overflow-hidden disabled:opacity-50 disabled:cursor-wait"
+                    className="w-full py-6 hover:cursor-pointer bg-white text-slate-950 text-[11px] font-black tracking-[0.3em] uppercase hover:bg-indigo-500 hover:text-white transition-all group relative overflow-hidden disabled:opacity-50 disabled:cursor-wait"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-4">
                       {isTransmitting ? "DATA PACKETIZING..." : "Initialize Transmission"}
