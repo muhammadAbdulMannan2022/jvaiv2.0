@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 
 import { Link } from "react-router";
-import { Linkedin } from "lucide-react";
+import { Linkedin, ArrowUp } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -19,6 +19,13 @@ const Footer = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [subscribeUpdate, { isLoading }] = useSubscribeUpdateMutation();
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const submit = async () => {
     if (!email) {
@@ -190,9 +197,21 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Copyright */}
-      <div className="text-center text-gray-600 mt-8 text-sm">
-        <p>© 2025, JVAI | All Rights Reserved</p>
+      {/* Copyright & Back to Top */}
+      <div className="container max-w-7xl mx-auto px-4 mt-12 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/5 pt-8 pb-12">
+        <p className="text-gray-600 text-sm order-2 md:order-1">
+          © 2025, JVAI | All Rights Reserved
+        </p>
+        
+        <button
+          onClick={scrollToTop}
+          className="flex items-center gap-3 text-white/40 hover:text-blue-500 transition-all group cursor-pointer order-1 md:order-2"
+        >
+          <span className="text-[10px] font-black uppercase tracking-[0.3em]">Back to Top</span>
+          <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-blue-500 group-hover:bg-blue-600 transition-all">
+            <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
+          </div>
+        </button>
       </div>
 
       {/* Large Logo at Bottom */}

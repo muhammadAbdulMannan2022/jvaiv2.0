@@ -46,62 +46,7 @@ const LifeAtJVAI = () => {
       message:
         "Working with Join Venture AI means getting more than just a developer; you’re getting a strategic partner. They excel at turning complex AI concepts into user-friendly digital products that drive real growth. Their success rate and global reach speak for themselves.",
     },
-    {
-      name: "Elena Rodriguez",
-      role: "UI/UX Designer",
-      image:
-        "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777890276/Gazi_vai_k9nlal.png",
-      message:
-        "Design isn't an afterthought here; it's the bridge between complex tech and human experience. I've never felt more empowered as a creator.",
-    },
-    {
-      name: "Anika Chowdhury",
-      role: "Senior Data Scientist",
-      image:
-        "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777890276/Gazi_vai_k9nlal.png",
-      message:
-        "Being part of JVAI feels like being at the center of the next big shift. The collaborative spirit here is incredible—we’re solving global challenges while constantly pushing the boundaries.",
-    },
-    {
-      name: "Tanvir Ahmed",
-      role: "Full Stack Developer",
-      image:
-        "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777890276/Gazi_vai_k9nlal.png",
-      message:
-        "Working at JVAI has been a game-changer. The focus on innovation and the high-energy environment makes every project feel like a breakthrough.",
-    },
-    {
-      name: "Fahim Hasan",
-      role: "DevOps Engineer",
-      image:
-        "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777890276/Gazi_vai_k9nlal.png",
-      message:
-        "The scale of the systems we build here at JVAI is mind-blowing. It's rare to find a place that balances cutting-edge tech with such a supportive engineering culture.",
-    },
-    {
-      name: "Nusrat Jahan",
-      role: "Backend Architect",
-      image:
-        "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777890276/Gazi_vai_k9nlal.png",
-      message:
-        "What I love about JVAI is the transparency. From the founders to the interns, everyone is aligned on the mission to redefine how AI interacts with the real world.",
-    },
-    {
-      name: "Ariful Islam",
-      role: "Mobile App Developer",
-      image:
-        "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777890276/Gazi_vai_k9nlal.png",
-      message:
-        "The pace here is fast, but the mentorship is even faster. I’ve grown more in one year at JVAI than I did in three years elsewhere. It's a true builder's paradise.",
-    },
-    {
-      name: "Mehnaz Karim",
-      role: "QA Automation Lead",
-      image:
-        "https://res.cloudinary.com/dn98ksbcf/image/upload/v1777890276/Gazi_vai_k9nlal.png",
-      message:
-        "We don't just ship products; we ship excellence. The attention to detail and the 'test-everything' mindset at JVAI ensures we're always delivering world-class software.",
-    },
+    
   ];
 
   return (

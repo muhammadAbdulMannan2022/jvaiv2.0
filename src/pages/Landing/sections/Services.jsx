@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 const App = ({ titleClass }) => {
   const [selectedService, setSelectedService] = useState(null);
   const { data: categoriesData, isLoading } = useGetAllCategoriesQuery();
-  const navigation = useNavigate()
+  const navigation = useNavigate();
 
   // Handle body scroll lock
   useEffect(() => {
@@ -38,7 +38,10 @@ const App = ({ titleClass }) => {
           </header>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="aspect-4/5 bg-white/5 rounded-2xl animate-pulse" />
+              <div
+                key={i}
+                className="aspect-4/5 bg-white/5 rounded-2xl animate-pulse"
+              />
             ))}
           </div>
         </main>
@@ -103,6 +106,9 @@ const App = ({ titleClass }) => {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            onClick={() => {
+              navigation("/contact");
+            }}
             className="flex flex-col justify-center p-12 bg-blue-600 rounded-2xl group cursor-pointer transition-colors hover:bg-blue-500"
           >
             <h3 className="text-3xl font-heading font-bold mb-4">
@@ -238,8 +244,12 @@ const App = ({ titleClass }) => {
                 )}
 
                 <div className="mt-12 pt-8 border-t border-white/5">
-                  <button onClick={()=>{navigation("/contact")
-                  }} className="w-full hover:cursor-pointer bg-blue-600 text-white py-4 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm hover:bg-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all transform hover:-translate-y-1">
+                  <button
+                    onClick={() => {
+                      navigation("/contact");
+                    }}
+                    className="w-full hover:cursor-pointer bg-blue-600 text-white py-4 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm hover:bg-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all transform hover:-translate-y-1"
+                  >
                     Inquire for Project
                   </button>
                 </div>
