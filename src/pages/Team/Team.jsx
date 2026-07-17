@@ -58,18 +58,6 @@ export const TEAM_MEMBERS = [
     videoUrl:
       "https://res.cloudinary.com/dn98ksbcf/video/upload/v1757576897/Sales_agm-_yj3dfv.mp4",
   },
-  {
-    id: "t3",
-    name: "Sheabuddin Tushar ",
-    role: "Head of Business Development",
-    department: "BizDev",
-    color: "#a855f7",
-    bio: "The vision strategist. Tushar identifies emerging sectors and forges high-level alliances to expand the JVAI ecosystem.",
-    image: "https://i.ibb.co/zTnX1SYk/106921c6a888.png",
-    connection: "Expansion Module: Forging external strategic synapses.",
-    videoUrl:
-      "https://res.cloudinary.com/dn98ksbcf/video/upload/v1757576890/Tushar_bhai_hgpvjq.mp4",
-  },
 ];
 const TeamPage = () => {
   const [selectedInterview, setSelectedInterview] = useState(null);
@@ -296,7 +284,7 @@ const TeamPage = () => {
         </div>
 
         {/* Support Nodes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Operations (Parallel HTOs) */}
           <div className="space-y-4 lg:col-span-2">
             <h2 className="text-[10px] font-black text-slate-600 tracking-[0.5em] uppercase px-4">
@@ -314,14 +302,6 @@ const TeamPage = () => {
               Market_Resonance
             </h2>
             {salesMember && <MemberDossier member={salesMember} />}
-          </div>
-
-          {/* BizDev */}
-          <div className="space-y-4 lg:col-span-1">
-            <h2 className="text-[10px] font-black text-slate-600 tracking-[0.5em] uppercase px-4">
-              Growth_Synapse
-            </h2>
-            {bizDevMember && <MemberDossier member={bizDevMember} />}
           </div>
         </div>
       </div>
